@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   customBorderRadius: {
+    position: " fixed",
     height: "510px",
     marginTop: "80px",
     borderRadius: 25,
@@ -75,6 +76,11 @@ const useStyles = makeStyles((theme) => ({
     // marginLeft: "45px",
     marginRight: "90px",
     width: "65%",
+  },
+  timezone: {
+    marginTop: "20px",
+    width: "66%",
+    // height: "266%",
   },
 }));
 
@@ -254,6 +260,8 @@ export default function Variants(props) {
                       </Label>
                     </Col>
                     <TimezoneSelect
+                      placeholder="Select Your TimeZone"
+                      className={classes.timezone}
                       value={selectedTimezone}
                       onChange={setSelectedTimezone}
                     />
