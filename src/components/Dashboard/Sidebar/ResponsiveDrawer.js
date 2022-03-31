@@ -1,6 +1,8 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
+import Badge from "@material-ui/core/Badge";
 import Drawer from "@mui/material/Drawer";
+import Paper from "@mui/material/Paper";
 import AppBar from "@mui/material/AppBar";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,6 +15,8 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import Navbar from "../Navbar/Navbar";
+import Candidate from "../../utils/Images/candidate.png";
+import { Link, NavLink } from "react-router-dom";
 import PersonalDetails from "../../Forms/PersonalDetails";
 import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles";
 
@@ -23,308 +27,307 @@ const drawerWidth = 220;
 const useStyles = makeStyles((theme) => ({
   active: {
     backgroundColor: theme.palette.action.selected,
-    borderRight: "5px solid #00a8ff",
+    borderRight: "5px solid #FF771B",
+  },
+  paperStyle: {
+    // backgroundColor: "#ffffff",
+    // position: "absolute",
+    borderRadius: "30px",
+    padding: 20,
+    height: 440,
+    width: 280,
+    // margin: "80px auto",
+    // marginTop: "-500px",
+  },
+  // ListItem: {
+  //   paddingBottom: "4px",
+  //   paddingLeft: "20px",
+  //   // backgroundColor: "#fff",
+  // },
+  typography: {
+    marginRight: "15px",
+    // paddingLeft: "25px",
+    size: "18px",
+    color: "#807AAC",
+    // backgroundColor: "#fff",
+  },
+  badge: {
+    marginRight: "10px",
   },
 }));
 
 export default function ClippedDrawer() {
   const classes = useStyles();
   const theme = useTheme();
+  const [selectedIndex, setSelectedIndex] = React.useState(1);
+
+  const handleListItemClick = (event, index) => {
+    setSelectedIndex(index);
+    // console.log(index)
+  };
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <div>
         <Navbar />
       </div>
-
-      <Drawer
-        variant="permanent"
+      <Box
         sx={{
-          width: drawerWidth,
-          //   height: drawerHeight,
-          flexShrink: 0,
-          [`& .MuiDrawer-paper`]: {
-            width: drawerWidth,
-            boxSizing: "border-box",
-            marginTop: "70px",
-            borderRadius: "20px",
+          display: "flex",
+          flexWrap: "wrap",
+          "& > :not(style)": {
+            m: 1,
+            width: 200,
+            height: 580,
+            borderRadius: "10px",
+            marginTop: "80px",
           },
         }}
       >
-        <Toolbar />
-
-        <Box sx={{ overflow: "auto" }}>
-          <ListItem
-            width="10%"
-            button
-            // selected={selectedIndex === 1}
-            // onClick={(event) => handleListItemClick(event, 1)}
-            // component={NavLink}
-            activeStyle={{ borderRight: "5px solid #00a8ff" }}
-            // exact
-            // to="/Dashboard"
-          >
-            <ListItemIcon className={classes.listicon}>
-              {/* <img src={dashboard} className={classes.images}></img> */}
-            </ListItemIcon>
-            <ListItemText disableTypography>
-              <Typography variant="subtitle2" className={classes.ListItemText}>
-                Personal Details
-              </Typography>
-            </ListItemText>
-            {/* {openDashboard ? <ExpandLess /> : <ExpandMore />} */}
-          </ListItem>
-          <ListItem
-            width="10%"
-            button
-            // selected={selectedIndex === 1}
-            // onClick={(event) => handleListItemClick(event, 1)}
-            // component={NavLink}
-            activeStyle={{ borderRight: "5px solid #00a8ff" }}
-            // exact
-            // to="/Dashboard"
-          >
-            <ListItemIcon className={classes.listicon}>
-              {/* <img src={dashboard} className={classes.images}></img> */}
-            </ListItemIcon>
-            <ListItemText disableTypography>
-              <Typography variant="subtitle2" className={classes.ListItemText}>
-                Activity
-              </Typography>
-            </ListItemText>
-            {/* {openDashboard ? <ExpandLess /> : <ExpandMore />} */}
-          </ListItem>
-          <ListItem
-            width="10%"
-            button
-            // selected={selectedIndex === 1}
-            // onClick={(event) => handleListItemClick(event, 1)}
-            // component={NavLink}
-            activeStyle={{ borderRight: "5px solid #00a8ff" }}
-            // exact
-            // to="/Dashboard"
-          >
-            <ListItemIcon className={classes.listicon}>
-              {/* <img src={dashboard} className={classes.images}></img> */}
-            </ListItemIcon>
-            <ListItemText disableTypography>
-              <Typography variant="subtitle2" className={classes.ListItemText}>
-                Email Setting
-              </Typography>
-            </ListItemText>
-            {/* {openDashboard ? <ExpandLess /> : <ExpandMore />} */}
-          </ListItem>
-          <ListItem
-            width="10%"
-            button
-            // selected={selectedIndex === 1}
-            // onClick={(event) => handleListItemClick(event, 1)}
-            // component={NavLink}
-            activeStyle={{ borderRight: "5px solid #00a8ff" }}
-            // exact
-            // to="/Dashboard"
-          >
-            <ListItemIcon className={classes.listicon}>
-              {/* <img src={dashboard} className={classes.images}></img> */}
-            </ListItemIcon>
-            <ListItemText disableTypography>
-              <Typography variant="subtitle2" className={classes.ListItemText}>
-                Change Password
-              </Typography>
-            </ListItemText>
-            {/* {openDashboard ? <ExpandLess /> : <ExpandMore />} */}
-          </ListItem>
-          <ListItem
-            width="10%"
-            button
-            // selected={selectedIndex === 1}
-            // onClick={(event) => handleListItemClick(event, 1)}
-            // component={NavLink}
-            activeStyle={{ borderRight: "5px solid #00a8ff" }}
-            // exact
-            // to="/Dashboard"
-          >
-            <ListItemIcon className={classes.listicon}>
-              {/* <img src={dashboard} className={classes.images}></img> */}
-            </ListItemIcon>
-            <ListItemText disableTypography>
-              <Typography variant="subtitle2" className={classes.ListItemText}>
-                Company Profile
-              </Typography>
-            </ListItemText>
-            {/* {openDashboard ? <ExpandLess /> : <ExpandMore />} */}
-          </ListItem>
-          <ListItem
-            width="10%"
-            button
-            // selected={selectedIndex === 1}
-            // onClick={(event) => handleListItemClick(event, 1)}
-            // component={NavLink}
-            activeStyle={{ borderRight: "5px solid #00a8ff" }}
-            // exact
-            // to="/Dashboard"
-          >
-            <ListItemIcon className={classes.listicon}>
-              {/* <img src={dashboard} className={classes.images}></img> */}
-            </ListItemIcon>
-            <ListItemText disableTypography>
-              <Typography variant="subtitle2" className={classes.ListItemText}>
-                Team Management
-              </Typography>
-            </ListItemText>
-            {/* {openDashboard ? <ExpandLess /> : <ExpandMore />} */}
-          </ListItem>
-          <ListItem
-            width="10%"
-            button
-            // selected={selectedIndex === 1}
-            // onClick={(event) => handleListItemClick(event, 1)}
-            // component={NavLink}
-            activeStyle={{ borderRight: "5px solid #00a8ff" }}
-            // exact
-            // to="/Dashboard"
-          >
-            <ListItemIcon className={classes.listicon}>
-              {/* <img src={dashboard} className={classes.images}></img> */}
-            </ListItemIcon>
-            <ListItemText disableTypography>
-              <Typography variant="subtitle2" className={classes.ListItemText}>
-                Plan & Billing
-              </Typography>
-            </ListItemText>
-            {/* {openDashboard ? <ExpandLess /> : <ExpandMore />} */}
-          </ListItem>
-          <ListItem
-            width="10%"
-            button
-            // selected={selectedIndex === 1}
-            // onClick={(event) => handleListItemClick(event, 1)}
-            // component={NavLink}
-            activeStyle={{ borderRight: "5px solid #00a8ff" }}
-            // exact
-            // to="/Dashboard"
-          >
-            <ListItemIcon className={classes.listicon}>
-              {/* <img src={dashboard} className={classes.images}></img> */}
-            </ListItemIcon>
-            <ListItemText disableTypography>
-              <Typography variant="subtitle2" className={classes.ListItemText}>
-                Integration
-              </Typography>
-            </ListItemText>
-            {/* {openDashboard ? <ExpandLess /> : <ExpandMore />} */}
-          </ListItem>
-          <ListItem
-            width="10%"
-            button
-            // selected={selectedIndex === 1}
-            // onClick={(event) => handleListItemClick(event, 1)}
-            // component={NavLink}
-            activeStyle={{ borderRight: "5px solid #00a8ff" }}
-            // exact
-            // to="/Dashboard"
-          >
-            <ListItemIcon className={classes.listicon}>
-              {/* <img src={dashboard} className={classes.images}></img> */}
-            </ListItemIcon>
-            <ListItemText disableTypography>
-              <Typography variant="subtitle2" className={classes.ListItemText}>
-                Privacy Policy
-              </Typography>
-            </ListItemText>
-            {/* {openDashboard ? <ExpandLess /> : <ExpandMore />} */}
-          </ListItem>
-          <ListItem
-            width="10%"
-            button
-            // selected={selectedIndex === 1}
-            // onClick={(event) => handleListItemClick(event, 1)}
-            // component={NavLink}
-            activeStyle={{ borderRight: "5px solid #00a8ff" }}
-            // exact
-            // to="/Dashboard"
-          >
-            <ListItemIcon className={classes.listicon}>
-              {/* <img src={dashboard} className={classes.images}></img> */}
-            </ListItemIcon>
-            <ListItemText disableTypography>
-              <Typography variant="subtitle2" className={classes.ListItemText}>
-                Terms & Conditions
-              </Typography>
-            </ListItemText>
-            {/* {openDashboard ? <ExpandLess /> : <ExpandMore />} */}
-          </ListItem>
-          {/* <List>
-            {[
-              "Personal Profile",
-              "Activity",
-              "Email setting",
-              "Change Password",
-              "Company Profile",
-              "Team Management",
-              "Plan & Billing",
-              "Integration",
-              "Privacy Policy",
-              "Term & Condition",
-            ].map((text, index) => (
-              <ListItem
-                button
-                key={text}
-                activeStyle={{ borderRight: "5px solid #00a8ff" }}
-              >
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem> */}
-          {/* ))}
-          </List> */}
-          <Divider />
-
-          {/* <List>
-            {["Global Setting", "Log Out"].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 1 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List> */}
-        </Box>
-      </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <Toolbar />
-        {/* <PersonalDetails /> */}
-        {/* <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-          dolor purus non enim praesent elementum facilisis leo vel. Risus at
-          ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum
-          quisque non tellus. Convallis convallis tellus id interdum velit
-          laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed
-          adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
-          integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate
-          eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo
-          quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
-          vivamus at augue. At augue eget arcu dictum varius duis at consectetur
-          lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
-          faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-          ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-          elementum integer enim neque volutpat ac tincidunt. Ornare suspendisse
-          sed nisi lacus sed viverra tellus. Purus sit amet volutpat consequat
-          mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis
-          risus sed vulputate odio. Morbi tincidunt ornare massa eget egestas
-          purus viverra accumsan in. In hendrerit gravida rutrum quisque non
-          tellus orci ac. Pellentesque nec nam aliquam sem et tortor. Habitant
-          morbi tristique senectus et. Adipiscing elit duis tristique
-          sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography> */}
+        <Paper elevation={4} style={{ position: "fixed" }}>
+          <List>
+            <ListItem
+              width="10%"
+              className={classes.ListItem}
+              button
+              // selected={selectedIndex === 1}
+              // onClick={(event) => handleListItemClick(event, 1)}
+              activeStyle={{ borderRight: "5px solid #FF771B" }}
+              component={NavLink}
+              exact
+              to="/personaldetails"
+            >
+              {/* <ListItemIcon className={classes.listicon}> */}
+              {/* <img src={Dashboard} className={classes.icons} /> */}
+              {/* </ListItemIcon> */}
+              <ListItemText>
+                <Typography variant="subtitle2" className={classes.typography}>
+                  <Badge>
+                    <img
+                      src={Candidate}
+                      alt="candidate"
+                      className={classes.badge}
+                    />
+                  </Badge>
+                  Personal Details
+                </Typography>
+              </ListItemText>
+            </ListItem>
+            <ListItem
+              width="10%"
+              className={classes.ListItem}
+              button
+              // selected={selectedIndex === 1}
+              // onClick={(event) => handleListItemClick(event, 1)}
+              component={Link}
+              exact
+              to="/Activity"
+            >
+              {/* <ListItemIcon className={classes.listicon}> */}
+              {/* <img src={Dashboard} className={classes.icons} /> */}
+              {/* </ListItemIcon> */}
+              <ListItemText disableTypography>
+                <Typography variant="subtitle2" className={classes.typography}>
+                  Activity
+                </Typography>
+              </ListItemText>
+            </ListItem>
+            <ListItem
+              width="10%"
+              className={classes.ListItem}
+              button
+              // selected={selectedIndex === 1}
+              // onClick={(event) => handleListItemClick(event, 1)}
+              component={Link}
+              exact
+              to="/emailSetting"
+            >
+              {/* <ListItemIcon className={classes.listicon}> */}
+              {/* <img src={Dashboard} className={classes.icons} /> */}
+              {/* </ListItemIcon> */}
+              <ListItemText disableTypography>
+                <Typography variant="subtitle2" className={classes.typography}>
+                  Email Settings
+                </Typography>
+              </ListItemText>
+            </ListItem>
+            <ListItem
+              width="10%"
+              className={classes.ListItem}
+              button
+              // selected={selectedIndex === 1}
+              // onClick={(event) => handleListItemClick(event, 1)}
+              activeStyle={{ borderRight: "5px solid #FF771B" }}
+              component={NavLink}
+              exact
+              to="/changePassword"
+            >
+              {/* <ListItemIcon className={classes.listicon}> */}
+              {/* <img src={Dashboard} className={classes.icons} /> */}
+              {/* </ListItemIcon> */}
+              <ListItemText disableTypography>
+                <Typography variant="subtitle2" className={classes.typography}>
+                  Change Password
+                </Typography>
+              </ListItemText>
+            </ListItem>
+            <ListItem
+              width="10%"
+              className={classes.ListItem}
+              button
+              // selected={selectedIndex === 1}
+              // onClick={(event) => handleListItemClick(event, 1)}
+              activeStyle={{ borderRight: "5px solid #FF771B" }}
+              component={NavLink}
+              exact
+              to="/companyinfo"
+            >
+              {/* <ListItemIcon className={classes.listicon}> */}
+              {/* <img src={Dashboard} className={classes.icons} /> */}
+              {/* </ListItemIcon> */}
+              <ListItemText disableTypography>
+                <Typography variant="subtitle2" className={classes.typography}>
+                  Company Profile
+                </Typography>
+              </ListItemText>
+            </ListItem>
+            <ListItem
+              width="10%"
+              className={classes.ListItem}
+              button
+              // selected={selectedIndex === 1}
+              // onClick={(event) => handleListItemClick(event, 1)}
+              component={NavLink}
+              exact
+              to="/companyinfo"
+            >
+              {/* <ListItemIcon className={classes.listicon}> */}
+              {/* <img src={Dashboard} className={classes.icons} /> */}
+              {/* </ListItemIcon> */}
+              <ListItemText disableTypography>
+                <Typography variant="subtitle2" className={classes.typography}>
+                  Team Management
+                </Typography>
+              </ListItemText>
+            </ListItem>
+            <ListItem
+              width="10%"
+              className={classes.ListItem}
+              button
+              // selected={selectedIndex === 1}
+              // onClick={(event) => handleListItemClick(event, 1)}
+              component={Link}
+              exact
+              to="/planBilling"
+            >
+              {/* <ListItemIcon className={classes.listicon}> */}
+              {/* <img src={Dashboard} className={classes.icons} /> */}
+              {/* </ListItemIcon> */}
+              <ListItemText disableTypography>
+                <Typography variant="subtitle2" className={classes.typography}>
+                  Plan & Billing
+                </Typography>
+              </ListItemText>
+            </ListItem>
+            <ListItem
+              width="10%"
+              className={classes.ListItem}
+              button
+              // selected={selectedIndex === 1}
+              // onClick={(event) => handleListItemClick(event, 1)}
+              component={Link}
+              exact
+              to="integration"
+            >
+              {/* <ListItemIcon className={classes.listicon}> */}
+              {/* <img src={Dashboard} className={classes.icons} /> */}
+              {/* </ListItemIcon> */}
+              <ListItemText disableTypography>
+                <Typography variant="subtitle2" className={classes.typography}>
+                  Integration
+                </Typography>
+              </ListItemText>
+            </ListItem>
+            <ListItem
+              width="10%"
+              className={classes.ListItem}
+              button
+              // selected={selectedIndex === 1}
+              // onClick={(event) => handleListItemClick(event, 1)}
+              component={Link}
+              exact
+              to="/privacy"
+            >
+              {/* <ListItemIcon className={classes.listicon}> */}
+              {/* <img src={Dashboard} className={classes.icons} /> */}
+              {/* </ListItemIcon> */}
+              <ListItemText disableTypography>
+                <Typography variant="subtitle2" className={classes.typography}>
+                  Privacy Policy
+                </Typography>
+              </ListItemText>
+            </ListItem>
+            <ListItem
+              width="10%"
+              className={classes.ListItem}
+              button
+              // selected={selectedIndex === 1}
+              // onClick={(event) => handleListItemClick(event, 1)}
+              component={Link}
+              exact
+              to="/terms"
+            >
+              {/* <ListItemIcon className={classes.listicon}> */}
+              {/* <img src={Dashboard} className={classes.icons} /> */}
+              {/* </ListItemIcon> */}
+              <ListItemText disableTypography>
+                <Typography variant="subtitle2" className={classes.typography}>
+                  Terms & Conditions
+                </Typography>
+              </ListItemText>
+            </ListItem>
+          </List>
+          <List>
+            <ListItem
+              width="10%"
+              // className={classes.ListItem}
+              button
+              // selected={selectedIndex === 1}
+              // onClick={(event) => handleListItemClick(event, 1)}
+              component={Link}
+              exact
+              to="/globalSetting"
+            >
+              {/* <ListItemIcon className={classes.listicon}> */}
+              {/* <img src={Dashboard} className={classes.icons} /> */}
+              {/* </ListItemIcon> */}
+              <ListItemText disableTypography>
+                <Typography variant="subtitle2" className={classes.typography}>
+                  Global Setting
+                </Typography>
+              </ListItemText>
+            </ListItem>
+            <ListItem
+              width="10%"
+              // className={classes.ListItem}
+              button
+              // selected={selectedIndex === 1}
+              // onClick={(event) => handleListItemClick(event, 1)}
+              component={Link}
+              exact
+              to="/logOut"
+            >
+              {/* <ListItemIcon className={classes.listicon}> */}
+              {/* <img src={Dashboard} className={classes.icons} /> */}
+              {/* </ListItemIcon> */}
+              <ListItemText disableTypography>
+                <Typography variant="subtitle2" className={classes.typography}>
+                  Log Out
+                </Typography>
+              </ListItemText>
+            </ListItem>
+          </List>
+        </Paper>
       </Box>
     </Box>
   );

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useRef, useState } from "react";
 import {
   Paper,
   Button,
@@ -14,7 +14,8 @@ import {
   makeStyles,
   Card,
 } from "@material-ui/core";
-import auth from "../Login/auth";
+import { useAuth } from "../Login/AuthContext";
+import { Link, useHistory } from "react-router-dom";
 
 // import Header from "../../../commons/Header/Header";
 import {
@@ -38,42 +39,50 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import CliqHR from "../utils/Images/hr.png";
 import signin from "../utils/Images/signin.png";
+import { red } from "@material-ui/core/colors";
 
 const useStyle = makeStyles({
   header: {
-    marginTop: "-38%",
+    marginTop: "-35%",
     // marginBottom: "-250px",
-    marginLeft: "900px",
+    marginLeft: "950px",
     width: "25%",
     borderRadius: "15px",
-    height: "350px",
+    height: "470px",
   },
   root: {
-    position: "absolute",
-    left: 940,
-    bottom: 220,
+    position: "static",
+    marginLeft: "25px",
+    marginTop: "80px",
     // top: 10,
   },
   reset: {
+    // position: "absolute"
+    paddingTop: "25px",
     marginTop: "50px",
-    marginRight: "50px",
+    marginLeft: "30px",
     color: "#211572",
   },
   back: {
-    height: "550px",
-    width: "750px",
-    marginRight: "40%",
-    marginTop: "2%",
+    top: "25%",
+    height: "553px",
+    marginLeft: "50px",
+    opacity: "1",
+    width: "799px",
+    // width: "750px",
+    // marginRight: "40%",
+    // marginTop: "2%",
   },
   cliq: {
-    marginRight: "80%",
-    marginTop: "",
+    // marginRight: "100%",
+    marginLeft: "65px",
+    marginTop: "25px",
   },
   btn1: {
-    left: "-100px",
+    left: "5px",
     marginTop: "55px",
     color: "white",
-    backgroundColor: "#3598CB",
+    background: "linear-gradient(90deg,#FF771B ,#F55CA2 ,#A256A8 ,#344CB6)",
     "&:hover": {
       backgroundColor: "#3598CB",
     },
@@ -85,32 +94,36 @@ const useStyle = makeStyles({
 
 export default function ChangePasswd(props) {
   const classes = useStyle();
-  //   const dispatch = useDispatch();
-  //   const [curr_pass, setCurrentPasswd] = useState("");
-  //   const [new_pass, setNewPasswd] = useState("");
-  //   const [confirm_pass, setConfirmPasswd] = useState("");
+
   const [showPassword, setShowPassword] = React.useState(false);
+  const [confPassword, setConfPassword] = React.useState(false);
 
-  //   const onSubmit = async () => {
-  //     const data = {
-  //       current_password: curr_pass,
-  //       new_password: new_pass,
-  //       confirm_password: confirm_pass,
-  //     };
-  // console.log(data);
-  // await dispatch(onChangePassword(data));
-  //   };
+  const [password, setpassword] = useState();
+  const [passwordConfirm, setpasswordConfirm] = useState();
+  const [err, seterr] = useState();
+  const [loading, setloading] = useState(false);
+  const history = useHistory();
 
-  //   const msg = useSelector((state) => {
-  //     return state.accounts;
-  //   });
+  const { signUp } = useAuth();
 
-  // console.log(msg);
-  //   const { error_msg, success_msg } = msg;
+  console.log(password, passwordConfirm);
+  const handleSubmit = (e) => {
+    console.log("reach", e);
+    e.preventDefault();
+    setloading(true);
+    if (password === passwordConfirm) {
+      // console.log(history.push);
+      history.push("personaldetails");
+    } else {
+      seterr("Passwords do not match!");
+    }
+    setloading(false);
+  };
 
   const handleTogglePassword = () =>
     setShowPassword((showPassword) => !showPassword);
-
+  const handleToggleConfPassword = () =>
+    setConfPassword((confPassword) => !confPassword);
   return (
     <Fragment>
       <Grid style={{ marginTop: "10px" }}>
@@ -120,21 +133,6 @@ export default function ChangePasswd(props) {
         {/* <img src={CliqHR} alt="cliq" /> */}
         <img src={signin} alt="lap" className={classes.back} />
       </Grid>
-      {/* <Header title="Change Password"></Header> */}
-
-      {/* <Grid>  
-               <InputBase 
-                 className={classes.searchInput}
-                 placeholder="Search"
-                onChange={(e)=>searchItem(e.target.value)}
-                                
-                value={search}
-                 startAdornment={<SearchOutlinedIcon fontSize="small" />} 
-                    />
-            
-            </Grid>  */}
-
-      {/* <Header className="col-md-2"></Header> */}
 
       <Paper
         elevation={3}
@@ -144,28 +142,36 @@ export default function ChangePasswd(props) {
         <div>
           <h2 className={classes.reset}>Reset Your Password</h2>
         </div>
-        <Form className={classes.root}>
+        <Form className={classes.root} onSubmit={handleSubmit}>
           <FormGroup row className={`mt-5 `}>
             <Label for="exampleEmail" sm={5}>
-              <strong style={{ marginRight: "65%", fontSize: "12px" }}>
-                New Password
+              <strong
+                style={{
+                  marginRight: "65%",
+                  fontSize: "12px",
+                  color: "#130D3C",
+                }}
+              >
+                Create Password
               </strong>
             </Label>
             <Col sm={7}>
               {/* <Input  type="password" name="select2"  id="exampleSelect" value={new_pass} onChange={(e)=>{setNewPasswd(e.target.value)}} > */}
               <OutlinedInput
                 className={classes.in}
+                inputProps={{
+                  pattern:
+                    "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$",
+                }}
+                onChange={(e) => setpassword(e.target.value)}
                 // id="outlined-adornment-password"
                 type={showPassword ? "text" : "password"}
-                // value={new_pass}
-                // onChange={(e) => {
-                //   setNewPasswd(e.target.value);
-                // }}
+                required
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
                       //   aria-label="toggle password visibility"
-                      //   onClick={handleTogglePassword}
+                      onClick={handleTogglePassword}
                       //   onMouseDown={handleMouseDownPassword}
                       edge="end"
                     >
@@ -175,11 +181,12 @@ export default function ChangePasswd(props) {
                 }
                 // labelWidth={70}
               />
+
               {/* </Input> */}
             </Col>
           </FormGroup>
 
-          <FormGroup row className={`mt-5 `}>
+          <FormGroup row className={`mt-5 `} style={{ marginTop: "25px" }}>
             <Label for="exampleEmail" sm={5}>
               <strong style={{ marginRight: "58%", fontSize: "12px" }}>
                 Confirm Password
@@ -192,7 +199,14 @@ export default function ChangePasswd(props) {
 
               <OutlinedInput
                 className={classes.in}
-                type={showPassword ? "text" : "password"}
+                type={confPassword ? "text" : "password"}
+                inputProps={{
+                  pattern:
+                    "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$",
+                }}
+                onChange={(e) => setpasswordConfirm(e.target.value)}
+                // ref={passwordConfirmRef}
+                required
                 // value={confirm_pass}
                 // onChange={(e) => {
                 //   setConfirmPasswd(e.target.value);
@@ -201,27 +215,23 @@ export default function ChangePasswd(props) {
                   <InputAdornment position="end">
                     <IconButton
                       //   aria-label="toggle password visibility"
-                      //   onClick={handleTogglePassword}
+                      onClick={handleToggleConfPassword}
                       //   onMouseDown={handleMouseDownPassword}
                       edge="end"
                     >
-                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                      {confPassword ? <Visibility /> : <VisibilityOff />}
                     </IconButton>
                   </InputAdornment>
                 }
               />
             </Col>
+            <label style={{ color: "red" }}>{err ? err : ""}</label>
           </FormGroup>
           <Button
-            onClick={() => {
-              auth.logout(() => {
-                props.history.push("dashboard");
-              });
-            }}
             variant="contained"
             className={`${classes.btn1} mt-4`}
             size="small"
-            // onClick={onSubmit}
+            type="submit"
           >
             Submit
           </Button>

@@ -9,17 +9,29 @@ import {
   Button,
   Box,
 } from "@material-ui/core";
+
+// toster
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import {
+  showErrorNotification,
+  configToast,
+  showSuccessNotification,
+} from "../../core/Toaster";
 import "./Login.css";
+import { useHistory, useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 import photo from "../utils/Images/vertical.png";
 import background from "../utils/Images/vertical.png";
 import image from "../utils/Images/vertical1.png";
 import CliqHR from "../utils/Images/hr.png";
 import circle from "../utils/Images/circle.png";
-
+import useForm from "../../hooks/use-forms";
 import pizza from "../utils/Images/pizza.png";
 import eclipse from "../utils/Images/eclipse.png";
 import emailjs from "emailjs-com";
-import auth from "./auth";
+// import auth from "./AuthContext";
 import * as Yup from "yup";
 
 // import {onLogin} from './../../../Redux/Authentication/authAction';
@@ -27,7 +39,7 @@ import * as Yup from "yup";
 // import { withRouter, Link, useHistory } from "react-router-dom";
 // import Logo from "./../../../../assets/nimap-logo.png";
 
-// import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { Formik, Field, ErrorMessage } from "formik";
 // import * as Yup from 'yup';
 // import { useForm } from "react-hook-form";
 // import { useDispatch } from "react-redux";
@@ -40,7 +52,7 @@ const useStyle = makeStyles({
     // position: "absolute",
     borderRadius: "30px",
     padding: 20,
-    height: "65vh",
+    height: 440,
     width: 280,
     margin: "80px auto",
     marginTop: "-500px",
@@ -64,56 +76,23 @@ const useStyle = makeStyles({
 });
 
 function EnterEmail(props) {
+  // console.log(props);
+  const [email, setEmail] = useState();
+  const [err, seterr] = useState();
+
+  const [loading, setloading] = useState(false);
   const classes = useStyle();
-  const validationSchema = Yup.object().shape({
-    username: Yup.string()
-      .email("Please enter valid email")
-      .required("Required"),
-  });
+  const history = useHistory();
+  const { login } = useAuth();
 
-  const onEmailChange = (e) => {
-    // setEmail(e.taget.value);
-  };
-  function sendEmail(e) {
-    // e.preventDefault(),
-    // emailjs
-    //   .sendForm(
-    //     "service_4qfi0sk",
-    //     "template_ievl6fa",
-    //     e.target,
-    //     "dKflt-gKUtDiSJKZv"
-    //   )
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => console.log(err));
+  function handleSubmit(e) {
+    e.preventDefault();
+    localStorage.setItem("email", email);
+    history.push("resetpassword");
   }
-  //   const dispatch = useDispatch();
-  //   const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("")
-  //   const initialValues = {
-  //     email: "",
-  //     password: "",
-  //   };
-  //   const { register, handleSubmit, errors } = useForm();
-
-  // const validationSchema = Yup.object().shape({
-  //     email: Yup.string().email('please enter valid email').required("Required"),
-  //     password: Yup.string().required("Required")
-  // })
-  //   const history = useHistory();
-
-  //   const onSubmit = (e) => {
-  //     const data = {
-  //       email: email,
-  //     };
-
-  //     dispatch(onSubmitEmail(data, history));
-  //   };
 
   return (
     <Box
-      component="form"
       sx={{
         "& .MuiTextField-root": { m: 1, width: "25ch" },
       }}
@@ -124,8 +103,12 @@ function EnterEmail(props) {
         <Grid style={{ marginLeft: "93%" }}>
           <img src={background} alt="background" />
         </Grid>
-        <Grid style={{ marginRight: "80%", paddingTop: "20px auto" }}>
-          <img src={CliqHR} alt="cliq" />
+        <Grid
+          style={{
+            marginRight: "80%",
+          }}
+        >
+          <img src={CliqHR} alt="cliq" style={{ marginLeft: "55px" }} />
           <Grid style={{ marginTop: "60%", paddingLeft: "75%" }}>
             <img src={pizza} alt="pizza" />
           </Grid>
@@ -178,25 +161,32 @@ function EnterEmail(props) {
             </h5>
           </Grid>
           <Grid>
-            {/* <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}> */}
-
-            <form onSubmit={sendEmail}>
+            <form onSubmit={handleSubmit}>
               <TextField
+                // error
                 style={{ width: "260px" }}
+                id="email"
+                // value={validationSchema}
                 // error
                 // id="outlined-error-helper-text"
                 type="email"
+                // pattern={"[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$"}
                 className="mt-5"
+                inputProps={{
+                  pattern: "[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$",
+                }}
                 //   value={email}
                 label="Enter Email Address"
                 //   inputRef={register}
                 name="email"
                 //   onChange={(e) => setEmail(e.target.value)}
                 fullWidth
+                // helperText="Incorrect entry."
                 variant="outlined"
                 // helperText="Enter a valid Email"
                 required
-              ></TextField>
+                onChange={(e) => setEmail(e.target.value)}
+              />
 
               <Button
                 // onClick={() => {
@@ -207,6 +197,7 @@ function EnterEmail(props) {
                 type="submit"
                 className={`${classes.buttonStyle} mt-2`}
                 variant="contained"
+                // onClick={(e) => handleSubmit(e)}
               >
                 Get more time
               </Button>
@@ -221,7 +212,6 @@ function EnterEmail(props) {
                 <img src={image} alt="photo" style={{ borderRadius: "20px" }} />
               </Grid>
             </form>
-            {/*</Formik> */}
           </Grid>
         </Paper>
       </Grid>

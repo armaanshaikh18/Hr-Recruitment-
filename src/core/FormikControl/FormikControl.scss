@@ -1,0 +1,99 @@
+@import '../../base';
+
+.form{
+    font-size: 13px;
+    display: grid;
+    align-content: center;
+
+    &__content{
+        display: grid;
+        // grid-auto-flow: column;
+        // grid-template-columns: repeat(2, 1fr);
+        justify-items: start;
+        gap: .5rem;
+        align-items: center;
+        justify-content: start;
+
+        &--label{
+            margin-bottom: 0px;
+            font-size: 1.1rem;
+        }
+
+        &--input{
+            justify-self: end;
+            padding: .4rem .5rem;
+            width: 300px;
+            height: 35px;
+            min-height: 35px;
+            max-height: 100px;
+            outline: none;
+            border-radius: 5px;
+            display: grid;
+            grid-template-columns: 5fr 1fr;
+            align-content: center;
+            // justify-content: center;
+            justify-items: start;
+            align-items: center;
+            font-size: 1.1rem;
+            grid-auto-flow: column;
+            border:1px solid hsl(0, 0%, 80%);
+
+            &-label{
+                display: grid;
+                background-color: mediumseagreen;
+                color: white;
+                padding: 5px 10px;
+                border-radius: 5px;
+                cursor: pointer;
+                justify-self: end;
+            }
+
+            &-file{
+                display: none;
+            }
+
+            &::placeholder{
+                font-size: 1.1rem;
+                color: #C5C6C6;
+            }
+
+            &-sec{
+                display: grid;
+                grid-auto-flow: column;
+                align-items: center;
+                height: 40px;
+                gap: .8rem;
+                justify-content: start;
+            }
+        }
+
+        &--error{
+            color:orangered;
+        }
+    }
+}
+
+.react-datepicker__input-container{
+    display: grid;
+}
+
+
+.anit{
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: repeat(3,1fr);
+    width: 100%;
+}
+
+.errorMessage{
+    color: orangered;
+}
+
+label{
+    margin-bottom: 0px;
+}
+
+.css-144kmby-menu{
+    overflow: auto;
+    max-height: 300px;
+}

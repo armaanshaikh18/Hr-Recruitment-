@@ -37,14 +37,14 @@ const useStyles = makeStyles((theme) => ({
     // width: "330px",
   },
   searchInput: {
-    // marginLeft: "15px",
+    // marginRight: "85px",
     opacity: "0.9",
-    width: "20%",
+    width: "18%",
     padding: "0px 8px",
     justifyContent: "end",
     fontSize: "1.2rem",
-    height: "42px",
-    borderRadius: "15px",
+    height: "32px",
+    borderRadius: "10px",
     border: " 1px solid black",
 
     backgroundColor: "white",
@@ -57,11 +57,15 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     color: "#807AAC",
-    marginLeft: "25px",
+    marginLeft: "30px",
+    // paddingLeft: "25px",
     display: "none",
     [theme.breakpoints.up("sm")]: {
       display: "block",
     },
+  },
+  badge: {
+    marginRight: "8px",
   },
   // search: {
   //   // marginLeft: "20%",
@@ -103,9 +107,10 @@ const useStyles = makeStyles((theme) => ({
   //   },
   // },
   sectionDesktop: {
-    // marginRight: "125px",
+    marginRight: "-1%",
     color: "grey",
-    display: "none",
+    display: "flex",
+    // position: "absolute",
     [theme.breakpoints.up("md")]: {
       display: "flex",
     },
@@ -204,10 +209,10 @@ export default function PrimarySearchAppBar() {
   return (
     <div className={classes.grow}>
       <AppBar
-        position="static"
+        position="fixed"
         style={{
           backgroundColor: "white",
-          width: "130%",
+          width: "100%",
           // marginLeft: "-150px",
           // marginRight: "50px",
         }}
@@ -221,47 +226,47 @@ export default function PrimarySearchAppBar() {
           >
             <MenuIcon />
           </IconButton> */}
-          <Typography className={classes.title} variant="h6" noWrap>
+          <Typography variant="h6" noWrap>
             <img src={CliqHR} alt="cliq" className={classes.cliq} />
           </Typography>
           <Typography className={classes.title} variant="h8" noWrap>
             <Badge>
-              <img style={{ marginLeft: "25px" }} src={Home} alt="home" />
+              <img src={Home} alt="home" className={classes.badge} />
             </Badge>
             Dashboard
           </Typography>
           <Typography className={classes.title} variant="h8" noWrap>
             <Badge>
-              <img src={Candidate} alt="home" />
+              <img src={Candidate} alt="candidate" className={classes.badge} />
             </Badge>
             Candidate
           </Typography>
           <Typography className={classes.title} variant="h8" noWrap>
             <Badge>
-              <img src={Asses} alt="home" />
+              <img src={Asses} alt="asses" className={classes.badge} />
             </Badge>
             Assessment
           </Typography>
           <Typography className={classes.title} variant="h8" noWrap>
             <Badge>
-              <img src={Library} alt="home" />
+              <img src={Library} alt="lib" className={classes.badge} />
             </Badge>
             Library
           </Typography>
           <Typography className={classes.title} variant="h8" noWrap>
             <Badge>
-              <img src={Interview} alt="home" />
+              <img src={Interview} alt="interview" className={classes.badge} />
             </Badge>
             Interview
           </Typography>
           <Typography className={classes.title} variant="h8" noWrap>
             <Badge>
-              <img src={Reports} alt="home" />
+              <img src={Reports} alt="reports" className={classes.badge} />
             </Badge>
             Reports
           </Typography>
           <InputBase
-            style={{ marginLeft: "10px" }}
+            style={{ marginLeft: "160px" }}
             className={`${classes.searchInput} md-4`}
             placeholder="Search"
             onChange={(e) => searchItem(e.target.value)}

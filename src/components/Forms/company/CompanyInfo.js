@@ -14,11 +14,14 @@ import {
   Alert,
 } from "reactstrap";
 import MuiPhoneNumber from "material-ui-phone-number";
-import Profile from "../utils/Images/pro.jpg";
+import Profile from "../../utils/Images/pro.jpg";
+import TextareaAutosize from "@mui/material/TextareaAutosize";
+import CountrySelect from "../CountrySelect";
+// import Profile from "../utils/Images/pro.jpg";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import TimezoneSelect from "react-timezone-select";
-import ResponsiveDrawer from "../Dashboard/Sidebar/ResponsiveDrawer";
+import ResponsiveDrawer from "../../Dashboard/Sidebar/ResponsiveDrawer";
 import { CountryRegionData } from "react-country-region-selector";
 import TextField from "@material-ui/core/TextField";
 import SendIcon from "@mui/icons-material/Send";
@@ -32,27 +35,31 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { styled } from "@mui/material/styles";
 import Typography from "@material-ui/core/Typography";
+import Customize from "../../../core/Customize";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
-import CountrySelect from "./CountrySelect";
-// import ResponsiveDrawer from " ../";
-// watch the video
-// https://react.school/material-ui/paper
+// import CountrySelect from "./CountrySelect";
+import Link from "@mui/material/Link";
+// import CompanyInfo from "../Forms/company/CompanyInfo";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
+  active: {
+    backgroundColor: theme.palette.action.selected,
+
+    // borderRight: "5px solid #FF771B",
+  },
   root: {
-    "& > *": {
-      marginTop: theme.spacing(-1),
-      marginLeft: theme.spacing(32),
-      width: theme.spacing(140),
-      height: theme.spacing(65),
-      borderShadow: "none",
-    },
+    // top: "90px",
+    width: "80%",
+    marginLeft: "240px",
   },
 
   customBorderRadius: {
+    height: "1200px",
+    marginTop: "80px",
     borderRadius: 25,
   },
   inp: {
@@ -65,6 +72,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "25px",
     textAlign: "left",
     color: "#211572",
+    fontWeight: "bold",
   },
   headerinfo: {
     textAlign: "left",
@@ -76,200 +84,343 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "90px",
     width: "65%",
   },
+  grid: {
+    marginTop: "25px",
+    padding: "0 27px",
+  },
 }));
 
 export default function Variants(props) {
   const classes = useStyles();
+  const history = useHistory();
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
+  const preventDefault = (event) => event.preventDefault();
 
   const Input = styled("input")({
     display: "none",
   });
   return (
     <>
-      <div>
-        {" "}
+      <div className="personal_details_parent">
         <ResponsiveDrawer />
-      </div>
 
-      <div className={classes.root}>
-        <Paper className={classes.customBorderRadius} elevation={15}>
-          <Box p={1}>
-            <Typography variant="h5" className={classes.header}>
-              Personal Information
-            </Typography>
-            <Typography variant="h8" className={classes.headerinfo}>
-              Enter the required information below to register
-            </Typography>
+        <div className={`${classes.root} Personal_Information `}>
+          <Paper className={classes.customBorderRadius} elevation={6}>
+            <Box p={1}>
+              <Typography variant="h5" className={classes.header}>
+                Company Profile
+              </Typography>
+              <Box
+                sx={{
+                  marginLeft: "25px",
+                  marginTop: "12px",
+                  display: "flex",
+                  flexWrap: "wrap",
+                  justifyContent: "left",
 
-            <Form>
-              <Grid container style={{ marginTop: "25px" }}>
-                <Grid item xs={5}>
-                  <Col md={4}>
-                    <Label
+                  typography: "body1",
+                  "& > :not(style) + :not(style)": {
+                    ml: 2,
+                  },
+                }}
+                onClick={preventDefault}
+              >
+                <Link
+                  activeStyle={{ color: "#FF771B" }}
+                  onClick={() => {
+                    history.push("companyinfo");
+                  }}
+                  underline="hover"
+                  cursor="pointer"
+                >
+                  Company Info
+                </Link>
+                <br />
+                <Link
+                  onClick={() => {
+                    history.push("companyvideo");
+                  }}
+                  underline="hover"
+                  style={{ marginLeft: "30px" }}
+                >
+                  Videos
+                </Link>
+
+                <br />
+                <Link
+                  onClick={() => {
+                    history.push("companylink");
+                  }}
+                  underline="hover"
+                  style={{ marginLeft: "30px" }}
+                >
+                  Links
+                </Link>
+                <br />
+                <Link
+                  onClick={() => {
+                    history.push("companyphoto");
+                  }}
+                  underline="hover"
+                  style={{ marginLeft: "30px" }}
+                >
+                  Photos
+                </Link>
+                <br />
+              </Box>
+              <hr></hr>
+              <Typography variant="h8" className={classes.header}>
+                Company Information
+              </Typography>
+
+              <Form>
+                <Grid container className={classes.grid}>
+                  <Grid item xs={5}>
+                    <Col md={4}>
+                      <Label
+                        style={{
+                          marginRight: "65%",
+                          color: "#130D3C",
+                        }}
+                      >
+                        <strong style={{ color: "#130D3C" }}>
+                          {" "}
+                          Company Name
+                        </strong>
+                      </Label>
+                    </Col>
+                    <TextField
+                      id="first-name"
+                      label="Enter Company Name"
+                      variant="outlined"
+                      className={classes.textField}
+                      // value={this.state.firstName}
+                      // onChange={this.handleChange("firstName")}
+                      margin="normal"
+                    />
+                  </Grid>
+                  <Grid item xs={5}>
+                    <Col md={4}>
+                      <Label style={{ marginRight: "65%" }}>
+                        <strong>Company Website</strong>
+                      </Label>
+                    </Col>
+                    <TextField
+                      id="last-name"
+                      label="Enter Company Website"
+                      variant="outlined"
+                      className={classes.textField}
+                      // value={this.state.lastName}
+                      // onChange={this.handleChange("lastName")}
+                      margin="normal"
+                    />
+                  </Grid>
+                </Grid>
+                <Grid container className={classes.grid}>
+                  <Grid item xs={5}>
+                    <Col md={4}>
+                      <Label
+                        style={{
+                          marginRight: "65%",
+                          color: "#130D3C",
+                        }}
+                      >
+                        <strong style={{ color: "#130D3C" }}>
+                          {" "}
+                          Contact Number
+                        </strong>
+                      </Label>
+                    </Col>
+                    <MuiPhoneNumber
                       style={{
-                        marginRight: "65%",
-                        color: "#130D3C",
+                        marginRight: "100px",
+                        marginTop: "15px",
+                        width: "65%",
                       }}
-                    >
-                      <strong style={{ color: "#130D3C" }}> First Name</strong>
-                    </Label>
-                  </Col>
-                  <TextField
-                    id="first-name"
-                    label="First Name"
-                    variant="outlined"
-                    className={classes.textField}
-                    // value={this.state.firstName}
-                    // onChange={this.handleChange("firstName")}
-                    margin="normal"
-                  />
+                      name="phone"
+                      variant="outlined"
+                      label="Phone Number"
+                      data-cy="user-phone"
+                      defaultCountry={"us"}
+                      //   value={this.state.phone}
+                      //   onChange={this.handlePhoneChange}
+                    />
+                  </Grid>
+                  <Grid item xs={5}>
+                    <Col md={4}>
+                      <Label style={{ marginRight: "65%" }}>
+                        <strong>Industry</strong>
+                      </Label>
+                    </Col>
+                    <TextField
+                      id="last-name"
+                      label="Select Industry"
+                      variant="outlined"
+                      className={classes.textField}
+                      // value={this.state.lastName}
+                      // onChange={this.handleChange("lastName")}
+                      margin="normal"
+                    />
+                  </Grid>
                 </Grid>
-                <Grid item xs={5}>
-                  <Col md={4}>
-                    <Label style={{ marginRight: "65%" }}>
-                      <strong>Last Name</strong>
-                    </Label>
-                  </Col>
-                  <TextField
-                    id="last-name"
-                    label="Last Name"
-                    variant="outlined"
-                    className={classes.textField}
-                    // value={this.state.lastName}
-                    // onChange={this.handleChange("lastName")}
-                    margin="normal"
-                  />
+                <Grid container className={classes.grid}>
+                  <Grid item xs={5}>
+                    <Col md={4}>
+                      <Label
+                        style={{
+                          marginRight: "65%",
+                          color: "#130D3C",
+                        }}
+                      >
+                        <strong style={{ color: "#130D3C" }}>
+                          {" "}
+                          Address Line 1
+                        </strong>
+                      </Label>
+                    </Col>
+                    <TextField
+                      id="first-name"
+                      label="Area/Street/Landmark"
+                      variant="outlined"
+                      className={classes.textField}
+                      // value={this.state.firstName}
+                      // onChange={this.handleChange("firstName")}
+                      margin="normal"
+                    />
+                  </Grid>
+                  <Grid item xs={5}>
+                    <Col md={4}>
+                      <Label style={{ marginRight: "65%" }}>
+                        <strong>Address Line 2</strong>
+                      </Label>
+                    </Col>
+                    <TextField
+                      id="last-name"
+                      label="City/Town/Location"
+                      variant="outlined"
+                      className={classes.textField}
+                      // value={this.state.lastName}
+                      // onChange={this.handleChange("lastName")}
+                      margin="normal"
+                    />
+                  </Grid>
                 </Grid>
-                <Grid item xs={5}>
-                  <Col md={4}>
-                    <Label style={{ marginRight: "65%" }}>
-                      <strong>Email ID</strong>
-                    </Label>
-                  </Col>
-                  <TextField
-                    id="email"
-                    label="Email"
-                    type="email"
-                    variant="outlined"
-                    className={classes.textField}
-                    // value={this.state.lastName}
-                    // onChange={this.handleChange("lastName")}
-                    margin="normal"
-                  />
+                <Grid container className={classes.grid}>
+                  <Grid item xs={5}>
+                    <Col md={4}>
+                      <Label
+                        style={{
+                          marginRight: "65%",
+                          color: "#130D3C",
+                        }}
+                      >
+                        <strong style={{ color: "#130D3C" }}> Country</strong>
+                      </Label>
+                    </Col>
+                    <CountrySelect />
+                  </Grid>
+                  <Grid item xs={5}>
+                    <Col md={4}>
+                      <Label style={{ marginRight: "65%" }}>
+                        <strong>Zip Code</strong>
+                      </Label>
+                    </Col>
+                    <TextField
+                      id="last-name"
+                      label="Enter Your Zip Code"
+                      variant="outlined"
+                      className={classes.textField}
+                      // value={this.state.lastName}
+                      // onChange={this.handleChange("lastName")}
+                      margin="normal"
+                    />
+                  </Grid>
                 </Grid>
-
-                <Grid item xs={5}>
-                  <Col md={4}>
-                    <Label style={{ marginRight: "65%" }}>
-                      <strong> Contact No</strong>
-                    </Label>
-                  </Col>
-                  <MuiPhoneNumber
-                    style={{
-                      marginRight: "100px",
-                      marginTop: "15px",
-                      width: "65%",
-                    }}
-                    name="phone"
-                    variant="outlined"
-                    label="Phone Number"
-                    data-cy="user-phone"
-                    defaultCountry={"us"}
-                    //   value={this.state.phone}
-                    //   onChange={this.handlePhoneChange}
-                  />
-                  {/* <TextField
-                    id="contact"
-                    label="Contact"
-                    variant="outlined"
-                    className={classes.textField}
-                    type="number"
-                    // maxlength="10"
-                    // value={this.state.lastName}
-                    // onChange={this.handleChange("lastName")}
-                    margin="normal"
-                  /> */}
+                <Grid container className={classes.grid}>
+                  <Grid item xs={5}>
+                    <Col md={4}>
+                      <Label
+                        style={{
+                          marginRight: "65%",
+                          color: "#130D3C",
+                        }}
+                      >
+                        <strong style={{ color: "#130D3C" }}>
+                          About Company
+                        </strong>
+                      </Label>
+                      <TextareaAutosize
+                        aria-label="minimum height"
+                        minRows={3}
+                        placeholder="Enter Company Description"
+                        style={{ width: 750, height: 100 }}
+                      />
+                      <Customize />
+                    </Col>
+                  </Grid>
                 </Grid>
-                <Grid item xs={5}>
-                  <Col md={4}>
-                    <Label style={{ marginRight: "65%" }}>
-                      <strong> Select Country</strong>
-                    </Label>
-                  </Col>
-                  {/* <InputLabel id="demo-multiple-name-label">Name</InputLabel> */}
-                  <CountrySelect />
-                  {/* <Select
-                    id="country"
-                    variant="outlined"
-                    className={classes.textField}
-                    // labelId="demo-simple-select-label"
-                    // id="demo-simple-select"
-                    // value={age}
-                    labelId="Country"
-                    margin="normal"
-
-                    // onChange={handleChange}
-                  >
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
-                  </Select> */}
-
-                  {/* <TextField
-                    id="country"
-                    label="Country"
-                    value={props.country}
-                    select
-                    // onChange={props.handleChange("country")}
-                  >
-                    {CountryRegionData.map((option, index) => (
-                      <MenuItem key={option[0]} value={option}>
-                        {option[0]}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                  <br />
-                  <TextField
-                    id="region"
-                    label="Region"
-                    value={props.region}
-                    select
-                    // onChange={props.handleChange("region")}
-                  >
-                    {getRegions(props.country).map((option, index) => (
-                      <MenuItem key={option} value={option}>
-                        {option}
-                      </MenuItem>
-                    ))}
-                  </TextField> */}
+                <Grid container className={classes.grid}>
+                  <Grid item xs={5}>
+                    <Col md={4}>
+                      <Label
+                        style={{
+                          marginRight: "65%",
+                          color: "#130D3C",
+                        }}
+                      >
+                        <strong style={{ color: "#130D3C" }}>
+                          Attach File
+                        </strong>
+                        <Paper
+                          variant="outlined"
+                          elevation={2}
+                          square
+                          style={{ height: 100, width: 750 }}
+                        >
+                          <Typography
+                            variant="h12"
+                            style={{ marginLeft: "250px" }}
+                          >
+                            Drop file here format should be PDF
+                          </Typography>
+                          <Stack
+                            direction="row"
+                            alignItems="center"
+                            spacing={2}
+                          >
+                            <label htmlFor="contained-button-file">
+                              <Input
+                                accept="image/*"
+                                id="contained-button-file"
+                                multiple
+                                type="file"
+                              />
+                              <Button
+                                variant="contained"
+                                // component="span"
+                                style={{
+                                  marginTop: "25px",
+                                  marginLeft: "320px",
+                                  backgroundColor: "#FFF",
+                                  borderColor: " #3C2AB6S",
+                                  color: "#3C2AB6S",
+                                }}
+                              >
+                                Upload File
+                              </Button>
+                            </label>
+                          </Stack>
+                        </Paper>
+                      </Label>
+                    </Col>
+                  </Grid>
                 </Grid>
-                <Grid item xs={5}>
-                  <Col md={4}>
-                    <Label style={{ marginRight: "65%" }}>
-                      <strong> Time Zone</strong>
-                    </Label>
-                  </Col>
-
-                  <Select
-                    id="time"
-                    variant="outlined"
-                    className={classes.textField}
-                    // labelId="demo-simple-select-label"
-                    // id="demo-simple-select"
-                    // value={age}
-                    labelId="Time"
-                    margin="normal"
-
-                    // onChange={handleChange}
-                  >
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
-                  </Select>
-                </Grid>
-                <Grid item xs={24} style={{ marginTop: "-18%" }}>
+                <Grid
+                  item
+                  xs={24}
+                  style={{ marginTop: "-60%", marginLeft: "950px" }}
+                >
                   <Stack direction="row" spacing={2}>
                     <Avatar
                       alt="Remy Sharp"
@@ -290,17 +441,20 @@ export default function Variants(props) {
                         component="span"
                         style={{
                           marginTop: "15px",
+
+                          paddingLeft: "25px",
                           marginLeft: "10px",
+
                           backgroundColor: "#FF771B",
                           color: "#fff",
                         }}
                       >
-                        Add Image
+                        Add Logo
                       </Button>
                     </label>
                   </Stack>
                 </Grid>
-                <Grid item xs={5} style={{ marginTop: "45px" }}>
+                <Grid item xs={5} style={{ marginTop: "600px" }}>
                   <Button
                     variant="contained"
                     style={{
@@ -324,7 +478,7 @@ export default function Variants(props) {
                       //   padding: "10px 24px",
                       //   textAlign: "left",
                       color: "#130D3C",
-                      //   backgroundColor: "#FF771B",
+                      backgroundColor: "#FFF",
                       width: "25%",
                       borderRadius: "10px",
                     }}
@@ -332,128 +486,10 @@ export default function Variants(props) {
                     Cancel
                   </Button>
                 </Grid>
-              </Grid>
-              {/* <FormGroup xs={12}>
-                <Row>
-                  <Col md={2}>
-                    <Label className={classes.lbl}>
-                      <strong>First Name</strong>
-                    </Label>
-                  </Col>
-                  <Col md={4}>
-                    <TextField
-                      id="outlined-basic"
-                      label="First Name"
-                      variant="outlined"
-                      size="small"
-                      // helperText={
-                      //   nameError ? (
-                      //     <span style={{ color: "red" }}>
-                      //       This is Required Field
-                      //     </span>
-                      //   ) : (
-                      //     ""
-                      //   )
-                      // }
-                      className={classes.inp}
-                      type="text"
-                      // value={firstname}
-                      // onChange={(newValue) => onChangeName(newValue)}
-                      name="firstname"
-                    ></TextField>
-                  </Col>
-
-                  <Col md={2}>
-                    <Label className={classes.lbl}>
-                      <strong>Last Name</strong>
-                    </Label>
-                  </Col>
-                  <Col md={4}>
-                    <TextField
-                      id="outlined-basic"
-                      label="Last Name"
-                      variant="outlined"
-                      size="small"
-                      // helperText={
-                      //   lastError ? (
-                      //     <span style={{ color: "red" }}>
-                      //       This is Required Field
-                      //     </span>
-                      //   ) : (
-                      //     ""
-                      //   )
-                      // }
-                      className={classes.inp}
-                      type="text"
-                      // value={lastname}
-                      // onChange={(newValue) => onChangeLast(newValue)}
-                      name="lastname"
-                    ></TextField>
-                  </Col>
-                </Row>
-                <FormGroup xs={12}>
-                  <Row>
-                    <Col md={2}>
-                      <Label className={classes.lbl}>
-                        <strong>Email Id</strong>
-                      </Label>
-                    </Col>
-                    <Col md={4}>
-                      <TextField
-                        id="outlined-basic"
-                        label="Email"
-                        variant="outlined"
-                        size="small"
-                        // helperText={
-                        //   nameError ? (
-                        //     <span style={{ color: "red" }}>
-                        //       This is Required Field
-                        //     </span>
-                        //   ) : (
-                        //     ""
-                        //   )
-                        // }
-                        className={classes.inp}
-                        type="email"
-                        // value={firstname}
-                        // onChange={(newValue) => onChangeName(newValue)}
-                        name="email"
-                      ></TextField>
-                    </Col>
-
-                    <Col md={2}>
-                      <Label className={classes.lbl}>
-                        <strong>Contact Number</strong>
-                      </Label>
-                    </Col>
-                    <Col md={4}>
-                      <TextField
-                        id="outlined-basic"
-                        label="Contact No"
-                        variant="outlined"
-                        size="small"
-                        // helperText={
-                        //   lastError ? (
-                        //     <span style={{ color: "red" }}>
-                        //       This is Required Field
-                        //     </span>
-                        //   ) : (
-                        //     ""
-                        //   )
-                        // }
-                        className={classes.inp}
-                        type="number"
-                        // value={lastname}
-                        // onChange={(newValue) => onChangeLast(newValue)}
-                        name="contact"
-                      ></TextField>
-                    </Col>
-                  </Row>
-                </FormGroup>
-              </FormGroup> */}
-            </Form>
-          </Box>
-        </Paper>
+              </Form>
+            </Box>
+          </Paper>
+        </div>
       </div>
     </>
   );
