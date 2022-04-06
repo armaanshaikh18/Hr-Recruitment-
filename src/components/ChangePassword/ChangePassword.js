@@ -42,6 +42,7 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import { Link, useHistory } from "react-router-dom";
+import "../Forms/style.css";
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -59,9 +60,13 @@ const useStyle = makeStyles((theme) => ({
   },
   in: {
     width: "30%",
+    height: "40px",
+    "& input::placeholder": {
+      fontSize: "12px",
+    },
   },
   header: {
-    marginTop: "10px",
+    marginTop: "15px",
     marginLeft: "25px",
     textAlign: "left",
     color: "#211572",
@@ -80,12 +85,14 @@ const useStyle = makeStyles((theme) => ({
   form: {
     position: "static",
     marginLeft: "25px",
-    marginTop: "50px",
+    marginTop: "40px",
     // top: 10,
   },
   forgot: {
     color: "#FF771B",
-    paddingLeft: "155px",
+    paddingLeft: "185px",
+    textDecoration: "none",
+    fontSize: "12px",
   },
 }));
 
@@ -136,19 +143,11 @@ export default function ChangePassword(props) {
               <Form className={classes.form} onSubmit={handleSubmit}>
                 <FormGroup row className={`mt-5 `}>
                   <Label for="exampleEmail" sm={5}>
-                    <strong
-                      style={{
-                        marginRight: "65%",
-                        fontSize: "12px",
-                        color: "#130D3C",
-                      }}
-                    >
-                      Current Password
-                    </strong>
+                    <strong className="modalTitle">Current Password</strong>
                   </Label>
                   <Col sm={7}>
-                    {/* <Input  type="password" name="select2"  id="exampleSelect" value={new_pass} onChange={(e)=>{setNewPasswd(e.target.value)}} > */}
                     <OutlinedInput
+                      size="small"
                       className={classes.in}
                       inputProps={{
                         pattern:
@@ -170,37 +169,22 @@ export default function ChangePassword(props) {
                           </IconButton>
                         </InputAdornment>
                       }
-                      // labelWidth={70}
                     />
-
-                    {/* </Input> */}
                   </Col>
-                  <a href="forget-password" className={classes.forgot}>
+                  <Link href="forget-password" className={classes.forgot}>
                     Forgot Password?
-                  </a>
+                  </Link>
                 </FormGroup>
 
                 <FormGroup
                   row
                   className={`mt-5 `}
-                  style={{ marginTop: "25px" }}
+                  style={{ marginTop: "10px" }}
                 >
                   <Label for="exampleEmail" sm={5}>
-                    <strong
-                      style={{
-                        marginRight: "58%",
-                        fontSize: "12px",
-                        color: "#130D3C",
-                      }}
-                    >
-                      Create New Password
-                    </strong>
+                    <strong className="modalTitle">Create New Password</strong>
                   </Label>
                   <Col sm={7}>
-                    {/* <Input  type="password" name="select2"  id="exampleSelect" value={confirm_pass} onChange={(e)=>{setConfirmPasswd(e.target.value)}} >
-                            
-                        </Input> */}
-
                     <OutlinedInput
                       className={classes.in}
                       type={confPassword ? "text" : "password"}
@@ -231,38 +215,13 @@ export default function ChangePassword(props) {
                   </Col>
                   <label style={{ color: "red" }}>{err ? err : ""}</label>
                 </FormGroup>
-                <Grid item xs={5} style={{ marginTop: "45px" }}>
-                  <Button
-                    variant="contained"
-                    type="submit"
-                    style={{
-                      float: "left",
-                      marginLeft: "5px",
-                      //   padding: "10px 24px",
-                      //   textAlign: "left",
-                      color: "#fff",
-                      backgroundColor: "#FF771B",
-                      width: "25%",
-                      borderRadius: "10px",
-                    }}
-                  >
+                <Grid item xs={5} style={{ marginTop: "65px" }}>
+                  <button variant="contained" type="submit" className="save">
                     Save
-                  </Button>
-                  <Button
-                    variant="contained"
-                    style={{
-                      float: "left",
-                      marginLeft: "30px",
-                      //   padding: "10px 24px",
-                      //   textAlign: "left",
-                      color: "#130D3C",
-                      backgroundColor: "#FFF",
-                      width: "25%",
-                      borderRadius: "10px",
-                    }}
-                  >
+                  </button>
+                  <button variant="contained" className="cancel">
                     Cancel
-                  </Button>
+                  </button>
                 </Grid>
               </Form>
             </Box>

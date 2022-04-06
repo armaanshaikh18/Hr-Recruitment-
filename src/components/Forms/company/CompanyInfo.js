@@ -42,14 +42,17 @@ import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 // import CountrySelect from "./CountrySelect";
 import Link from "@mui/material/Link";
+import { Editor } from "react-draft-wysiwyg";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import CompanyText from "../CompanyText";
 // import CompanyInfo from "../Forms/company/CompanyInfo";
 import { useHistory } from "react-router-dom";
-
+import "../../Forms/style.css";
 const useStyles = makeStyles((theme) => ({
   active: {
     backgroundColor: theme.palette.action.selected,
 
-    // borderRight: "5px solid #FF771B",
+    borderRight: "5px solid #FF771B",
   },
   root: {
     // top: "90px",
@@ -58,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   customBorderRadius: {
-    height: "1200px",
+    height: "1220px",
     marginTop: "80px",
     borderRadius: 25,
   },
@@ -83,6 +86,9 @@ const useStyles = makeStyles((theme) => ({
     // marginLeft: "45px",
     marginRight: "90px",
     width: "65%",
+    "& input::placeholder": {
+      fontSize: "12px",
+    },
   },
   grid: {
     marginTop: "25px",
@@ -94,6 +100,7 @@ export default function Variants(props) {
   const classes = useStyles();
   const history = useHistory();
   const [firstname, setFirstName] = useState("");
+  // const [editorState, setEditorState] = useState("");
   const [lastname, setLastName] = useState("");
   const preventDefault = (event) => event.preventDefault();
 
@@ -184,15 +191,13 @@ export default function Variants(props) {
                           color: "#130D3C",
                         }}
                       >
-                        <strong style={{ color: "#130D3C" }}>
-                          {" "}
-                          Company Name
-                        </strong>
+                        <strong className="modalTitle"> Company Name</strong>
                       </Label>
                     </Col>
                     <TextField
+                      size="small"
                       id="first-name"
-                      label="Enter Company Name"
+                      placeholder="Enter Company Name"
                       variant="outlined"
                       className={classes.textField}
                       // value={this.state.firstName}
@@ -203,12 +208,13 @@ export default function Variants(props) {
                   <Grid item xs={5}>
                     <Col md={4}>
                       <Label style={{ marginRight: "65%" }}>
-                        <strong>Company Website</strong>
+                        <strong className="modalTitle">Company Website</strong>
                       </Label>
                     </Col>
                     <TextField
+                      size="small"
                       id="last-name"
-                      label="Enter Company Website"
+                      placeholder="Enter Company Website"
                       variant="outlined"
                       className={classes.textField}
                       // value={this.state.lastName}
@@ -226,10 +232,7 @@ export default function Variants(props) {
                           color: "#130D3C",
                         }}
                       >
-                        <strong style={{ color: "#130D3C" }}>
-                          {" "}
-                          Contact Number
-                        </strong>
+                        <strong className="modalTitle"> Contact Number</strong>
                       </Label>
                     </Col>
                     <MuiPhoneNumber
@@ -239,8 +242,9 @@ export default function Variants(props) {
                         width: "65%",
                       }}
                       name="phone"
+                      placeholder="Contact Number"
+                      size="small"
                       variant="outlined"
-                      label="Phone Number"
                       data-cy="user-phone"
                       defaultCountry={"us"}
                       //   value={this.state.phone}
@@ -250,12 +254,13 @@ export default function Variants(props) {
                   <Grid item xs={5}>
                     <Col md={4}>
                       <Label style={{ marginRight: "65%" }}>
-                        <strong>Industry</strong>
+                        <strong className="modalTitle">Industry</strong>
                       </Label>
                     </Col>
                     <TextField
+                      size="small"
                       id="last-name"
-                      label="Select Industry"
+                      placeholder="Select Industry"
                       variant="outlined"
                       className={classes.textField}
                       // value={this.state.lastName}
@@ -273,15 +278,13 @@ export default function Variants(props) {
                           color: "#130D3C",
                         }}
                       >
-                        <strong style={{ color: "#130D3C" }}>
-                          {" "}
-                          Address Line 1
-                        </strong>
+                        <strong className="modalTitle"> Address Line 1</strong>
                       </Label>
                     </Col>
                     <TextField
+                      size="small"
                       id="first-name"
-                      label="Area/Street/Landmark"
+                      placeholder="Area/Street/Landmark"
                       variant="outlined"
                       className={classes.textField}
                       // value={this.state.firstName}
@@ -292,12 +295,13 @@ export default function Variants(props) {
                   <Grid item xs={5}>
                     <Col md={4}>
                       <Label style={{ marginRight: "65%" }}>
-                        <strong>Address Line 2</strong>
+                        <strong className="modalTitle">Address Line 2</strong>
                       </Label>
                     </Col>
                     <TextField
+                      size="small"
                       id="last-name"
-                      label="City/Town/Location"
+                      placeholder="City/Town/Location"
                       variant="outlined"
                       className={classes.textField}
                       // value={this.state.lastName}
@@ -315,7 +319,7 @@ export default function Variants(props) {
                           color: "#130D3C",
                         }}
                       >
-                        <strong style={{ color: "#130D3C" }}> Country</strong>
+                        <strong className="modalTitle"> Country</strong>
                       </Label>
                     </Col>
                     <CountrySelect />
@@ -323,12 +327,13 @@ export default function Variants(props) {
                   <Grid item xs={5}>
                     <Col md={4}>
                       <Label style={{ marginRight: "65%" }}>
-                        <strong>Zip Code</strong>
+                        <strong className="modalTitle">Zip Code</strong>
                       </Label>
                     </Col>
                     <TextField
+                      size="small"
                       id="last-name"
-                      label="Enter Your Zip Code"
+                      placeholder="Enter Your Zip Code"
                       variant="outlined"
                       className={classes.textField}
                       // value={this.state.lastName}
@@ -346,17 +351,9 @@ export default function Variants(props) {
                           color: "#130D3C",
                         }}
                       >
-                        <strong style={{ color: "#130D3C" }}>
-                          About Company
-                        </strong>
+                        <strong className="modalTitle">About Company</strong>
                       </Label>
-                      <TextareaAutosize
-                        aria-label="minimum height"
-                        minRows={3}
-                        placeholder="Enter Company Description"
-                        style={{ width: 750, height: 100 }}
-                      />
-                      <Customize />
+                      <CompanyText />
                     </Col>
                   </Grid>
                 </Grid>
@@ -369,25 +366,28 @@ export default function Variants(props) {
                           color: "#130D3C",
                         }}
                       >
-                        <strong style={{ color: "#130D3C" }}>
-                          Attach File
-                        </strong>
+                        <strong className="modalTitle">Attach File</strong>
                         <Paper
                           variant="outlined"
                           elevation={2}
                           square
-                          style={{ height: 100, width: 750 }}
+                          style={{
+                            height: 120,
+                            width: 850,
+                            textAlign: "center",
+                          }}
                         >
-                          <Typography
-                            variant="h12"
-                            style={{ marginLeft: "250px" }}
-                          >
+                          <Typography variant="h12" className="paper-text">
                             Drop file here format should be PDF
+                            <br />
+                            <div className="midon">OR</div>
                           </Typography>
+
                           <Stack
                             direction="row"
                             alignItems="center"
                             spacing={2}
+                            style={{ justifyContent: "center" }}
                           >
                             <label htmlFor="contained-button-file">
                               <Input
@@ -398,14 +398,8 @@ export default function Variants(props) {
                               />
                               <Button
                                 variant="contained"
-                                // component="span"
-                                style={{
-                                  marginTop: "25px",
-                                  marginLeft: "320px",
-                                  backgroundColor: "#FFF",
-                                  borderColor: " #3C2AB6S",
-                                  color: "#3C2AB6S",
-                                }}
+                                component="span"
+                                className="upload"
                               >
                                 Upload File
                               </Button>
@@ -419,7 +413,7 @@ export default function Variants(props) {
                 <Grid
                   item
                   xs={24}
-                  style={{ marginTop: "-60%", marginLeft: "950px" }}
+                  style={{ marginTop: "-70%", marginLeft: "950px" }}
                 >
                   <Stack direction="row" spacing={2}>
                     <Avatar
@@ -436,55 +430,21 @@ export default function Variants(props) {
                         multiple
                         type="file"
                       />
-                      <Button
-                        variant="contained"
-                        component="span"
-                        style={{
-                          marginTop: "15px",
-
-                          paddingLeft: "25px",
-                          marginLeft: "10px",
-
-                          backgroundColor: "#FF771B",
-                          color: "#fff",
-                        }}
-                      >
-                        Add Logo
-                      </Button>
+                      <button className="profile">Add Logo</button>
                     </label>
                   </Stack>
                 </Grid>
-                <Grid item xs={5} style={{ marginTop: "600px" }}>
-                  <Button
-                    variant="contained"
-                    style={{
-                      float: "left",
-                      marginLeft: "30px",
-                      //   padding: "10px 24px",
-                      //   textAlign: "left",
-                      color: "#fff",
-                      backgroundColor: "#FF771B",
-                      width: "25%",
-                      borderRadius: "10px",
-                    }}
-                  >
+                <Grid
+                  item
+                  xs={5}
+                  style={{ marginTop: "560px", marginLeft: "25px" }}
+                >
+                  <button variant="contained" className="save">
                     Send
-                  </Button>
-                  <Button
-                    variant="contained"
-                    style={{
-                      float: "left",
-                      marginLeft: "30px",
-                      //   padding: "10px 24px",
-                      //   textAlign: "left",
-                      color: "#130D3C",
-                      backgroundColor: "#FFF",
-                      width: "25%",
-                      borderRadius: "10px",
-                    }}
-                  >
+                  </button>
+                  <button variant="contained" className="cancel">
                     Cancel
-                  </Button>
+                  </button>
                 </Grid>
               </Form>
             </Box>

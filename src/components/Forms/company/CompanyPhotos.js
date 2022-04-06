@@ -167,20 +167,9 @@ export default function Variants(props) {
               <Typography variant="h8" className={classes.header}>
                 Photo Gallery
               </Typography>
-              <Button
-                variant="contained"
-                onClick={AddPhoto}
-                component="span"
-                style={{
-                  //   paddingLeft: "25px",
-
-                  float: "right",
-                  backgroundColor: "#FF771B",
-                  color: "#fff",
-                }}
-              >
+              <button onClick={AddPhoto} className="main-btn">
                 Add Album
-              </Button>
+              </button>
             </Box>
           </Paper>
         </div>

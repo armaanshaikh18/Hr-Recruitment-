@@ -26,6 +26,7 @@ import {
 } from "@mui/material";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
+import "../../Forms/style.css";
 
 const style = {
   position: "absolute",
@@ -33,7 +34,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "30%",
-  height: "52%",
+  height: "56%",
   bgcolor: "background.paper",
   //   border: "2px solid #000",
   borderRadius: "20px",
@@ -43,22 +44,20 @@ const style = {
   //   overflow: "scroll",
 };
 const useStyles = makeStyles((theme) => ({
-  //   grid: {
-  //     marginTop: "25px",
-  //     padding: "0 27px",
-  //     marginRight: "45px",
-  //   },
   textField: {
     // marginLeft: "45px",
     marginRight: "90px",
     width: "140%",
+    "& input::placeholder": {
+      fontSize: "12px",
+    },
   },
   header: {
     marginTop: "10px",
     marginLeft: "25px",
     textAlign: "left",
     color: "#211572",
-    fontWeight: "bold",
+    fontWeight: "900",
   },
 }));
 export default function AddPhotoModal({ show, closeModal }) {
@@ -73,9 +72,10 @@ export default function AddPhotoModal({ show, closeModal }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography variant="h6" className={classes.header}>
+          <Typography variant="h7" className={classes.header}>
             Create Album
           </Typography>
+          <hr></hr>
           <Form>
             <Grid item xs={8}>
               <Col md={8}>
@@ -85,14 +85,13 @@ export default function AddPhotoModal({ show, closeModal }) {
                     color: "#130D3C",
                   }}
                 >
-                  <strong style={{ color: "#130D3C", fontSize: "12px" }}>
-                    Album Name
-                  </strong>
+                  <strong className="modalTitle">Album Name</strong>
                 </Label>
               </Col>
               <TextField
                 id="album"
-                label="Album Name"
+                placeholder="Album Name"
+                size="small"
                 variant="outlined"
                 className={classes.textField}
                 // value={this.state.firstName}
@@ -108,29 +107,47 @@ export default function AddPhotoModal({ show, closeModal }) {
                         color: "#130D3C",
                       }}
                     >
-                      <strong style={{ color: "#130D3C", fontSize: "12px" }}>
+                      <strong className="modalTitle">
                         Images (Max Size limit is 2MB)
                       </strong>
                       <Paper
                         variant="outlined"
                         elevation={2}
                         square
-                        style={{ height: 100, width: 400, marginTop: "20px" }}
+                        style={{
+                          height: 120,
+                          width: 400,
+                          marginTop: "20px",
+                          textAlign: "center",
+                        }}
                       >
-                        <Typography
-                          variant="h8"
-                          style={{
-                            color: "#D2D4D6",
-                            marginLeft: "60px",
-                            fontSize: "14px",
-                          }}
-                        >
+                        <Typography variant="h8" className="paper-text">
                           Drop file here format should be PNG/JPG
                         </Typography>
+                        <br />
+                        <div className="midon">OR</div>
 
-                        <Stack direction="row" alignItems="center" spacing={2}>
+                        <Stack
+                          direction="row"
+                          alignItems="center"
+                          spacing={2}
+                          style={{ justifyContent: "center" }}
+                        >
                           <label htmlFor="contained-button-file">
-                            <Input
+                            {/* <Input
+                              accept="image/*"
+                              id="contained-button-file"
+                              multiple
+                              type="file"
+                            /> */}
+                            <button
+                              variant="contained"
+                              component="span"
+                              className="upload"
+                            >
+                              Upload Images
+                            </button>
+                            {/* <Input
                               style={{
                                 // display: "flex",
                                 marginTop: "20px",
@@ -141,7 +158,7 @@ export default function AddPhotoModal({ show, closeModal }) {
                               multiple
                               type="file"
                               label="Upload"
-                            />
+                            /> */}
                           </label>
                         </Stack>
                       </Paper>
@@ -149,43 +166,17 @@ export default function AddPhotoModal({ show, closeModal }) {
                   </Col>
                 </Grid>
               </Grid>
-              <Grid
-                item
-                xs={6}
-                style={{ marginLeft: "-20px", marginTop: "5px" }}
-              >
-                <Button
-                  variant="contained"
-                  style={{
-                    float: "left",
-                    marginLeft: "30px",
-                    // padding: "10px 24px",
-                    //   textAlign: "left",
-                    color: "#fff",
-                    backgroundColor: "#FF771B",
-                    // width: "65px",
-                    borderRadius: "5px",
-                  }}
-                >
-                  Create
-                </Button>
-                <Button
+              <Grid item xs={12}>
+                <button variant="contained" className="save">
+                  Create album
+                </button>
+                <button
                   variant="contained"
                   onClick={closeModal}
-                  style={{
-                    marginTop: "-65px",
-                    //   float: "left",
-                    marginLeft: "140px",
-                    //   padding: "10px 24px",
-                    //   textAlign: "left",
-                    color: "#130D3C",
-                    backgroundColor: "#FFF",
-                    width: "25%",
-                    borderRadius: "5px",
-                  }}
+                  className="cancel"
                 >
                   Cancel
-                </Button>
+                </button>
               </Grid>
             </Grid>
           </Form>

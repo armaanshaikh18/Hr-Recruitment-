@@ -167,20 +167,9 @@ export default function Variants(props) {
               <Typography variant="h8" className={classes.header}>
                 Social Media links
               </Typography>
-              <Button
-                variant="contained"
-                onClick={AddLink}
-                component="span"
-                style={{
-                  //   paddingLeft: "25px",
-
-                  float: "right",
-                  backgroundColor: "#FF771B",
-                  color: "#fff",
-                }}
-              >
+              <button onClick={AddLink} className="main-btn">
                 Add Links
-              </Button>
+              </button>
             </Box>
           </Paper>
         </div>

@@ -34,17 +34,7 @@ import emailjs from "emailjs-com";
 // import auth from "./AuthContext";
 import * as Yup from "yup";
 
-// import {onLogin} from './../../../Redux/Authentication/authAction';
-// import { connect } from "react-redux";
-// import { withRouter, Link, useHistory } from "react-router-dom";
-// import Logo from "./../../../../assets/nimap-logo.png";
-
 import { Formik, Field, ErrorMessage } from "formik";
-// import * as Yup from 'yup';
-// import { useForm } from "react-hook-form";
-// import { useDispatch } from "react-redux";
-// import EnterOtpValue from "./EnterOtp";
-// import { onSubmitEmail } from "./../../../../Redux/Authentication/authAction";
 
 const useStyle = makeStyles({
   paperStyle: {
@@ -53,18 +43,32 @@ const useStyle = makeStyles({
     borderRadius: "30px",
     padding: 20,
     height: 440,
-    width: 280,
+    width: 350,
     margin: "80px auto",
-    marginTop: "-500px",
+    marginTop: "-470px",
   },
   avatarStyle: {
     backgroundColor: "#17B8C8",
     margin: 10,
   },
 
-  buttonStyle: {
-    background: "linear-gradient(90deg,#FF771B ,#F55CA2 ,#A256A8 ,#344CB6)",
+  header: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  logo: {
+    width: "138px",
+    height: "40px",
+    margin: "28px 0 0 28px",
+  },
 
+  buttonStyle: {
+    height: "40px",
+    width: "125px",
+    background: "linear-gradient(90deg,#FF771B ,#F55CA2 ,#A256A8 ,#344CB6)",
+    fontSize: "12px",
+    textTransform: "capitalize",
+    color: "#fff",
     marginRight: 120,
     borderRadius: "8px",
     marginTop: 30,
@@ -72,6 +76,12 @@ const useStyle = makeStyles({
     "&:hover": {
       backgroundColor: "#17B8C8",
     },
+  },
+  input: {
+    boxShadow: "0px 8px 24px #9891C636",
+    border: "none",
+    backgroundColor: "transparent",
+    borderRadius: "8px",
   },
 });
 
@@ -94,13 +104,14 @@ function EnterEmail(props) {
   return (
     <Box
       sx={{
-        "& .MuiTextField-root": { m: 1, width: "25ch" },
+        "& .MuiTextField-root": { m: 1 },
       }}
       noValidate
       autoComplete="off"
     >
-      <Grid>
-        <Grid style={{ marginLeft: "93%" }}>
+      <Grid style={{ background: "#F7F7F9", height: "100vh" }}>
+        <Grid className={classes.header}>
+          <img src={CliqHR} alt="cliq" className={classes.logo} />
           <img src={background} alt="background" />
         </Grid>
         <Grid
@@ -108,21 +119,20 @@ function EnterEmail(props) {
             marginRight: "80%",
           }}
         >
-          <img src={CliqHR} alt="cliq" style={{ marginLeft: "55px" }} />
           <Grid style={{ marginTop: "60%", paddingLeft: "75%" }}>
             <img src={pizza} alt="pizza" />
           </Grid>
           <Grid style={{ paddingLeft: "320%" }}>
             <img src={eclipse} alt="eclipse" />
           </Grid>
-          <Grid style={{ marginLeft: "465%" }}>
-            <img src={circle} alt="circle" />
-          </Grid>
         </Grid>
-        <Paper elevation={10} className={classes.paperStyle}>
+        <Grid style={{ marginLeft: "93%" }}>
+          <img src={circle} alt="circle" />
+        </Grid>
+        <Paper elevation={2} className={classes.paperStyle}>
           <Grid
             style={{
-              marginLeft: "205px",
+              marginLeft: "275px",
               marginTop: "-20px",
               borderRadius: "20px",
             }}
@@ -133,8 +143,11 @@ function EnterEmail(props) {
           <Grid>
             <h1
               style={{
+                fontWeight: "900",
+                fontFamily: "Nunito Sans, Black",
                 marginTop: "-40px",
-                font: "72px",
+
+                font: "60px",
                 color: "#211572",
                 marginRight: "60px",
               }}
@@ -147,53 +160,39 @@ function EnterEmail(props) {
             </h1>
           </Grid>
           <Grid>
-            <h5
+            <h4
               style={{
-                font: "15px",
+                font: "22px",
                 marginRight: "50px",
-                fontStyle: "oblique",
+
+                fontFamily: "Nunito Sans, SemiBold",
               }}
             >
               We analyzed the time saved by over
               <br /> 4,000 teams after switching to
               <br /> CliqHR to manage their projects. <br />
               That's 52 days back every year!
-            </h5>
+            </h4>
           </Grid>
           <Grid>
             <form onSubmit={handleSubmit}>
               <TextField
-                // error
-                style={{ width: "260px" }}
+                size="small"
                 id="email"
-                // value={validationSchema}
-                // error
-                // id="outlined-error-helper-text"
                 type="email"
-                // pattern={"[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$"}
-                className="mt-5"
+                className={classes.input}
                 inputProps={{
                   pattern: "[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$",
                 }}
-                //   value={email}
-                label="Enter Email Address"
-                //   inputRef={register}
+                placeholder="Your  Email Address"
                 name="email"
-                //   onChange={(e) => setEmail(e.target.value)}
                 fullWidth
-                // helperText="Incorrect entry."
                 variant="outlined"
-                // helperText="Enter a valid Email"
                 required
                 onChange={(e) => setEmail(e.target.value)}
               />
 
               <Button
-                // onClick={() => {
-                //   auth.login(() => {
-                //     props.history.push("/resetpassword");
-                //   });
-                // }}
                 type="submit"
                 className={`${classes.buttonStyle} mt-2`}
                 variant="contained"
@@ -203,8 +202,8 @@ function EnterEmail(props) {
               </Button>
               <Grid
                 style={{
-                  marginLeft: "205px",
-                  marginTop: "-70px",
+                  marginLeft: "275px",
+                  marginTop: "-75px",
                   borderRadius: "15px",
                 }}
               >
@@ -218,9 +217,5 @@ function EnterEmail(props) {
     </Box>
   );
 }
-
-// const mapStateToProps = (state)=>({
-//     auth:state.auth,
-// });
 
 export default EnterEmail;

@@ -39,7 +39,7 @@ import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import AddVideoModal from "../modals/AddVideosModal";
 import Link from "@mui/material/Link";
-
+import "../../Forms/style.css";
 import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -167,20 +167,14 @@ export default function Variants(props) {
               <Typography variant="h8" className={classes.header}>
                 Company Video links
               </Typography>
-              <Button
+              <button
                 variant="contained"
+                className="main-btn"
                 onClick={AddVideo}
                 component="span"
-                style={{
-                  //   paddingLeft: "25px",
-
-                  float: "right",
-                  backgroundColor: "#FF771B",
-                  color: "#fff",
-                }}
               >
                 Add Videos
-              </Button>
+              </button>
             </Box>
           </Paper>
         </div>

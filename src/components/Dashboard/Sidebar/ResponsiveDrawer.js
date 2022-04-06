@@ -22,7 +22,6 @@ import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles";
 
 import CliqHR from "../../utils/Images/hr.png";
 const drawerWidth = 220;
-// const drawerHeight = 120;
 
 const useStyles = makeStyles((theme) => ({
   active: {
@@ -30,20 +29,12 @@ const useStyles = makeStyles((theme) => ({
     borderRight: "5px solid #FF771B",
   },
   paperStyle: {
-    // backgroundColor: "#ffffff",
-    // position: "absolute",
     borderRadius: "30px",
     padding: 20,
     height: 440,
     width: 280,
-    // margin: "80px auto",
-    // marginTop: "-500px",
   },
-  // ListItem: {
-  //   paddingBottom: "4px",
-  //   paddingLeft: "20px",
-  //   // backgroundColor: "#fff",
-  // },
+
   typography: {
     marginRight: "15px",
     // paddingLeft: "25px",

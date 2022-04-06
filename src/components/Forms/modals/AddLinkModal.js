@@ -31,7 +31,7 @@ import facebook from "../../utils/Images/book.png";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TextField from "@material-ui/core/TextField";
 import Top from "../../utils/Images/modalTop.svg";
-
+import "../../Forms/style.css";
 import { makeStyles } from "@material-ui/core/styles";
 
 const style = {
@@ -40,7 +40,7 @@ const style = {
   left: "80%",
   transform: "translate(-50%, -50%)",
   width: "25%",
-  height: "45%",
+  height: "40%",
   bgcolor: "background.paper",
   //   border: "2px solid #000",
   borderRadius: "20px",
@@ -59,6 +59,9 @@ const useStyles = makeStyles((theme) => ({
     // marginLeft: "45px",
     marginRight: "90px",
     width: "200%",
+    "& input::placeholder": {
+      fontSize: "12px",
+    },
   },
   header: {
     marginTop: "10px",
@@ -95,7 +98,7 @@ export default function AddLinkModal({ show, closeModal }) {
           {/* <img src={Top} alt="top" className={classes.modalTop} /> */}
 
           <Form>
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <Col md={4}>
                 <Label
                   style={{
@@ -103,27 +106,16 @@ export default function AddLinkModal({ show, closeModal }) {
                     color: "#130D3C",
                   }}
                 >
-                  <strong
-                    style={{
-                      color: "#130D3C",
-                      fontSize: "14px",
-                      display: "inline-block",
-                    }}
-                  >
-                    Select Social Profile
-                  </strong>
+                  <strong className="modalTitle">Select Social Profile</strong>
                 </Label>
                 <Box sx={{ minWidth: 120, marginTop: "20px" }}>
-                  <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">
-                      Social
-                    </InputLabel>
+                  <FormControl>
                     <Select
-                      style={{ width: "200%" }}
-                      labelId="demo-simple-select-label"
+                      placeholder="Select"
+                      size="small"
+                      style={{ width: "720%" }}
                       id="demo-simple-select"
                       //   value={age}
-                      label="Social "
                       //   onChange={handleChange}
                     >
                       <MenuItem value={1} className={classes.menu}>
@@ -142,11 +134,6 @@ export default function AddLinkModal({ show, closeModal }) {
                         />
                         Facebook
                       </MenuItem>
-                      {/* <i>
-                        <FontAwesomeIcon icon="fa-brands fa-facebook" />
-                      </i> */}
-                      {/* <MenuItem value={2}>Facebook</MenuItem>
-                      <MenuItem value={3}>Instagram</MenuItem> */}
                     </Select>
                   </FormControl>
                 </Box>
@@ -160,19 +147,13 @@ export default function AddLinkModal({ show, closeModal }) {
                     color: "#130D3C",
                   }}
                 >
-                  <strong
-                    style={{
-                      color: "#130D3C",
-                      fontSize: "14px",
-                    }}
-                  >
-                    Link
-                  </strong>
+                  <strong className="modalTitle">Link</strong>
                 </Label>
               </Col>
               <TextField
                 id="link"
-                label="Enter Link"
+                size="small"
+                placeholder="Enter Link"
                 variant="outlined"
                 className={classes.textField}
                 // value={this.state.firstName}
@@ -181,43 +162,17 @@ export default function AddLinkModal({ show, closeModal }) {
               />
             </Grid>
 
-            <Grid
-              item
-              xs={6}
-              style={{ marginLeft: "-20px", marginTop: "25px" }}
-            >
-              <Button
-                variant="contained"
-                style={{
-                  float: "left",
-                  marginLeft: "30px",
-                  //   padding: "10px 24px",
-                  //   textAlign: "left",
-                  color: "#fff",
-                  backgroundColor: "#FF771B",
-                  //   width: "65px",
-                  borderRadius: "5px",
-                }}
-              >
+            <Grid item xs={12} style={{ marginTop: "25px" }}>
+              <button variant="contained" className="save">
                 Save
-              </Button>
-              <Button
+              </button>
+              <button
                 variant="contained"
+                className="cancel"
                 onClick={closeModal}
-                style={{
-                  marginTop: "-65px",
-                  //   float: "left",
-                  marginLeft: "120px",
-                  //   padding: "10px 24px",
-                  //   textAlign: "left",
-                  color: "#130D3C",
-                  backgroundColor: "#FFF",
-                  width: "25%",
-                  borderRadius: "5px",
-                }}
               >
                 Cancel
-              </Button>
+              </button>
             </Grid>
           </Form>
         </Box>

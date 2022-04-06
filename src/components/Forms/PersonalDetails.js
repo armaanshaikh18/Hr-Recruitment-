@@ -13,6 +13,7 @@ import {
   Row,
   Alert,
 } from "reactstrap";
+import InputAdornment from "@mui/material/InputAdornment";
 // import TimeZoneSelect from "./TimeZoneSelect";
 import MuiPhoneNumber from "material-ui-phone-number";
 // import { TimezonePicker } from "baseui/timezonepicker";
@@ -40,6 +41,7 @@ import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CountrySelect from "./CountrySelect";
 import TimezoneSelect from "react-timezone-select";
+import "../Forms/style.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -66,6 +68,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "10px",
     textAlign: "left",
     color: "#211572",
+    fontWeight: "bold",
   },
   headerinfo: {
     textAlign: "left",
@@ -73,14 +76,20 @@ const useStyles = makeStyles((theme) => ({
     color: "#D2D4D6",
   },
   textField: {
-    // marginLeft: "45px",
     marginRight: "90px",
     width: "65%",
+
+    "& input::placeholder": {
+      fontSize: "12px",
+    },
   },
   timezone: {
     marginTop: "20px",
     width: "66%",
-    // height: "266%",
+    "& input::placeholder": {
+      fontSize: "14px",
+    },
+    // minHeight: "100px !important",
   },
 }));
 
@@ -118,15 +127,13 @@ export default function Variants(props) {
                           color: "#130D3C",
                         }}
                       >
-                        <strong style={{ color: "#130D3C" }}>
-                          {" "}
-                          First Name
-                        </strong>
+                        <strong className="modalTitle"> First Name</strong>
                       </Label>
                     </Col>
                     <TextField
+                      size="small"
                       id="first-name"
-                      label="First Name"
+                      placeholder="First Name"
                       variant="outlined"
                       className={classes.textField}
                       // value={this.state.firstName}
@@ -137,12 +144,13 @@ export default function Variants(props) {
                   <Grid item xs={5}>
                     <Col md={4}>
                       <Label style={{ marginRight: "65%" }}>
-                        <strong>Last Name</strong>
+                        <strong className="modalTitle">Last Name</strong>
                       </Label>
                     </Col>
                     <TextField
                       id="last-name"
-                      label="Last Name"
+                      size="small"
+                      placeholder="Last Name"
                       variant="outlined"
                       className={classes.textField}
                       // value={this.state.lastName}
@@ -153,14 +161,18 @@ export default function Variants(props) {
                   <Grid item xs={5}>
                     <Col md={4}>
                       <Label style={{ marginRight: "65%" }}>
-                        <strong>Email ID</strong>
+                        <strong className="modalTitle">Email ID</strong>
                       </Label>
                     </Col>
                     <TextField
                       id="email"
-                      label="Email"
                       type="email"
+                      size="small"
+                      placeholder="Enter Email"
                       variant="outlined"
+                      endAdornment={
+                        <InputAdornment position="end"></InputAdornment>
+                      }
                       className={classes.textField}
                       // value={this.state.lastName}
                       // onChange={this.handleChange("lastName")}
@@ -171,7 +183,7 @@ export default function Variants(props) {
                   <Grid item xs={5}>
                     <Col md={4}>
                       <Label style={{ marginRight: "65%" }}>
-                        <strong> Contact No</strong>
+                        <strong className="modalTitle"> Contact Number</strong>
                       </Label>
                     </Col>
                     <MuiPhoneNumber
@@ -181,82 +193,27 @@ export default function Variants(props) {
                         width: "65%",
                       }}
                       name="phone"
+                      size="small"
+                      placeholder="Contact Number"
                       variant="outlined"
-                      label="Phone Number"
                       data-cy="user-phone"
                       defaultCountry={"us"}
                       //   value={this.state.phone}
                       //   onChange={this.handlePhoneChange}
                     />
-                    {/* <TextField
-              id="contact"
-              label="Contact"
-              variant="outlined"
-              className={classes.textField}
-              type="number"
-              // maxlength="10"
-              // value={this.state.lastName}
-              // onChange={this.handleChange("lastName")}
-              margin="normal"
-            /> */}
                   </Grid>
                   <Grid item xs={5}>
                     <Col md={4}>
                       <Label style={{ marginRight: "65%" }}>
-                        <strong> Select Country</strong>
+                        <strong className="modalTitle"> Country</strong>
                       </Label>
                     </Col>
-                    {/* <InputLabel id="demo-multiple-name-label">Name</InputLabel> */}
                     <CountrySelect />
-                    {/* <Select
-              id="country"
-              variant="outlined"
-              className={classes.textField}
-              // labelId="demo-simple-select-label"
-              // id="demo-simple-select"
-              // value={age}
-              labelId="Country"
-              margin="normal"
-
-              // onChange={handleChange}
-            >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select> */}
-
-                    {/* <TextField
-              id="country"
-              label="Country"
-              value={props.country}
-              select
-              // onChange={props.handleChange("country")}
-            >
-              {CountryRegionData.map((option, index) => (
-                <MenuItem key={option[0]} value={option}>
-                  {option[0]}
-                </MenuItem>
-              ))}
-            </TextField>
-            <br />
-            <TextField
-              id="region"
-              label="Region"
-              value={props.region}
-              select
-              // onChange={props.handleChange("region")}
-            >
-              {getRegions(props.country).map((option, index) => (
-                <MenuItem key={option} value={option}>
-                  {option}
-                </MenuItem>
-              ))}
-            </TextField> */}
                   </Grid>
                   <Grid item xs={5}>
                     <Col md={4}>
                       <Label style={{ marginRight: "65%" }}>
-                        <strong> Time Zone</strong>
+                        <strong className="modalTitle"> Time Zone</strong>
                       </Label>
                     </Col>
                     <TimezoneSelect
@@ -265,30 +222,6 @@ export default function Variants(props) {
                       value={selectedTimezone}
                       onChange={setSelectedTimezone}
                     />
-                    {/* <TimezoneSelect /> */}
-                    {/* <TimezonePicker
-                      value={value}
-                      onChange={({ id }) => setValue(id)}
-                      date={new Date("2022-03-31T08:50:00.050Z")}
-                    /> */}
-                    {/* <TimezonePicker date={new Date(2019, 2, 1)} /> */}
-
-                    {/* <Select
-                      id="time"
-                      variant="outlined"
-                      className={classes.textField}
-                      // labelId="demo-simple-select-label"
-                      // id="demo-simple-select"
-                      // value={age}
-                      labelId="Time"
-                      margin="normal"
-
-                      // onChange={handleChange}
-                    >
-                      <MenuItem value={10}>Ten</MenuItem>
-                      <MenuItem value={20}>Twenty</MenuItem>
-                      <MenuItem value={30}>Thirty</MenuItem>
-                    </Select> */}
                   </Grid>
                   <Grid item xs={24} style={{ marginTop: "-14%" }}>
                     <Stack direction="row" spacing={2}>
@@ -306,172 +239,21 @@ export default function Variants(props) {
                           multiple
                           type="file"
                         />
-                        <Button
+                        <button
                           variant="contained"
+                          className="profile"
                           component="span"
-                          style={{
-                            marginTop: "15px",
-                            marginLeft: "10px",
-                            backgroundColor: "#FF771B",
-                            color: "#fff",
-                          }}
                         >
-                          Add Image
-                        </Button>
+                          <div style={{ color: "#FF771B" }}>Add Image</div>
+                        </button>
                       </label>
                     </Stack>
                   </Grid>
                   <Grid item xs={5} style={{ marginTop: "45px" }}>
-                    <Button
-                      variant="contained"
-                      style={{
-                        float: "left",
-                        marginLeft: "5px",
-                        //   padding: "10px 24px",
-                        //   textAlign: "left",
-                        color: "#fff",
-                        backgroundColor: "#FF771B",
-                        width: "25%",
-                        borderRadius: "10px",
-                      }}
-                    >
-                      Send
-                    </Button>
-                    <Button
-                      variant="contained"
-                      style={{
-                        float: "left",
-                        marginLeft: "30px",
-                        //   padding: "10px 24px",
-                        //   textAlign: "left",
-                        color: "#130D3C",
-                        backgroundColor: "#FFF",
-                        width: "25%",
-                        borderRadius: "10px",
-                      }}
-                    >
-                      Cancel
-                    </Button>
+                    <button className="save">Save</button>
+                    <button className="cancel">Cancel</button>
                   </Grid>
                 </Grid>
-                {/* <FormGroup xs={12}>
-          <Row>
-            <Col md={2}>
-              <Label className={classes.lbl}>
-                <strong>First Name</strong>
-              </Label>
-            </Col>
-            <Col md={4}>
-              <TextField
-                id="outlined-basic"
-                label="First Name"
-                variant="outlined"
-                size="small"
-                // helperText={
-                //   nameError ? (
-                //     <span style={{ color: "red" }}>
-                //       This is Required Field
-                //     </span>
-                //   ) : (
-                //     ""
-                //   )
-                // }
-                className={classes.inp}
-                type="text"
-                // value={firstname}
-                // onChange={(newValue) => onChangeName(newValue)}
-                name="firstname"
-              ></TextField>
-            </Col>
-
-            <Col md={2}>
-              <Label className={classes.lbl}>
-                <strong>Last Name</strong>
-              </Label>
-            </Col>
-            <Col md={4}>
-              <TextField
-                id="outlined-basic"
-                label="Last Name"
-                variant="outlined"
-                size="small"
-                // helperText={
-                //   lastError ? (
-                //     <span style={{ color: "red" }}>
-                //       This is Required Field
-                //     </span>
-                //   ) : (
-                //     ""
-                //   )
-                // }
-                className={classes.inp}
-                type="text"
-                // value={lastname}
-                // onChange={(newValue) => onChangeLast(newValue)}
-                name="lastname"
-              ></TextField>
-            </Col>
-          </Row>
-          <FormGroup xs={12}>
-            <Row>
-              <Col md={2}>
-                <Label className={classes.lbl}>
-                  <strong>Email Id</strong>
-                </Label>
-              </Col>
-              <Col md={4}>
-                <TextField
-                  id="outlined-basic"
-                  label="Email"
-                  variant="outlined"
-                  size="small"
-                  // helperText={
-                  //   nameError ? (
-                  //     <span style={{ color: "red" }}>
-                  //       This is Required Field
-                  //     </span>
-                  //   ) : (
-                  //     ""
-                  //   )
-                  // }
-                  className={classes.inp}
-                  type="email"
-                  // value={firstname}
-                  // onChange={(newValue) => onChangeName(newValue)}
-                  name="email"
-                ></TextField>
-              </Col>
-
-              <Col md={2}>
-                <Label className={classes.lbl}>
-                  <strong>Contact Number</strong>
-                </Label>
-              </Col>
-              <Col md={4}>
-                <TextField
-                  id="outlined-basic"
-                  label="Contact No"
-                  variant="outlined"
-                  size="small"
-                  // helperText={
-                  //   lastError ? (
-                  //     <span style={{ color: "red" }}>
-                  //       This is Required Field
-                  //     </span>
-                  //   ) : (
-                  //     ""
-                  //   )
-                  // }
-                  className={classes.inp}
-                  type="number"
-                  // value={lastname}
-                  // onChange={(newValue) => onChangeLast(newValue)}
-                  name="contact"
-                ></TextField>
-              </Col>
-            </Row>
-          </FormGroup>
-        </FormGroup> */}
               </Form>
             </Box>
           </Paper>

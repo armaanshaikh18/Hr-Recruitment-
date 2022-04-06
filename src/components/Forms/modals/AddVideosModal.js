@@ -26,7 +26,7 @@ import {
 import TextField from "@material-ui/core/TextField";
 import Top from "../../utils/Images/modalTop.svg";
 import { makeStyles } from "@material-ui/core/styles";
-
+import "../../Forms/style.css";
 const style = {
   position: "absolute",
   top: "50%",
@@ -51,15 +51,21 @@ const useStyles = makeStyles((theme) => ({
   },
   textField: {
     // marginLeft: "45px",
+    border: "1px solid #E1E3E6",
+    borderRadius: "8px",
+    background: "transparent",
     marginRight: "90px",
     width: "200%",
+    "& input::placeholder": {
+      fontSize: "12px",
+    },
   },
   header: {
     marginTop: "10px",
     marginLeft: "25px",
     textAlign: "left",
     color: "#211572",
-    fontWeight: "bold",
+    fontWeight: "900",
   },
   modalTop: {
     left: "552px",
@@ -81,7 +87,7 @@ export default function AddVideoModal({ show, closeModal }) {
       >
         <Box sx={style}>
           {/* <img src={Top} alt="top" className={classes.modalTop} /> */}
-          <Typography variant="h6" className={classes.header}>
+          <Typography variant="h7" className={classes.header}>
             Add Video
           </Typography>
           <hr></hr>
@@ -94,40 +100,19 @@ export default function AddVideoModal({ show, closeModal }) {
                     color: "#130D3C",
                   }}
                 >
-                  <strong style={{ color: "#130D3C", fontSize: "14px" }}>
-                    {" "}
-                    Title{" "}
-                  </strong>
+                  <strong className="modalTitle"> Title </strong>
                 </Label>
               </Col>
               <TextField
                 style={{ marginTop: "5px" }}
                 id="title"
-                label="Company Introduction"
+                size="small"
+                placeholder="Company Introduction"
                 variant="outlined"
                 className={classes.textField}
                 // value={this.state.firstName}
                 // onChange={this.handleChange("firstName")}
                 margin="normal"
-              />
-            </Grid>
-            <Grid item xs={5}>
-              <Col md={8}>
-                <Label
-                  style={{
-                    marginRight: "65%",
-                    color: "#130D3C",
-                  }}
-                >
-                  <strong style={{ color: "#130D3C" }}> Description </strong>
-                </Label>
-              </Col>
-
-              <TextareaAutosize
-                aria-label="minimum height"
-                minRows={3}
-                placeholder="Enter Company Description"
-                style={{ width: 500, height: 100 }}
               />
             </Grid>
             <Grid item xs={6}>
@@ -138,35 +123,55 @@ export default function AddVideoModal({ show, closeModal }) {
                     color: "#130D3C",
                   }}
                 >
-                  <strong style={{ color: "#130D3C" }}> Link </strong>
+                  <strong className="modalTitle"> Description </strong>
                 </Label>
               </Col>
-
               <TextField
                 style={{ marginTop: "5px" }}
-                id="first-name"
-                label="Video Link"
+                id="title"
+                multiline={true}
+                rows={4}
+                placeholder="Company Introduction"
                 variant="outlined"
                 className={classes.textField}
                 // value={this.state.firstName}
                 // onChange={this.handleChange("firstName")}
                 margin="normal"
               />
-              <Button
+            </Grid>
+            <Grid item xs={6}>
+              <Col md={8}>
+                <Label
+                  style={{
+                    marginRight: "65%",
+                    color: "#130D3C",
+                  }}
+                >
+                  <strong className="modalTitle"> Link </strong>
+                </Label>
+              </Col>
+
+              <TextField
+                style={{ marginTop: "5px" }}
+                id="first-name"
+                size="small"
+                placeholder="Video Link"
+                variant="outlined"
+                className={classes.textField}
+                // value={this.state.firstName}
+                // onChange={this.handleChange("firstName")}
+                margin="normal"
+              />
+              <button
                 variant="contained"
                 component="span"
-                style={{
-                  marginTop: "5px",
-                  //   paddingLeft: "25px",
-                  marginLeft: "10px",
-                  backgroundColor: "#FF771B1A",
-                  color: "#FF771B",
-                }}
+                className="profile"
+                style={{ marginBottom: "10px" }}
               >
                 Refresh Link
-              </Button>
+              </button>
             </Grid>
-            <br />
+
             <Grid item xs={5}>
               <Col md={8}>
                 <Label
@@ -175,10 +180,11 @@ export default function AddVideoModal({ show, closeModal }) {
                     color: "#130D3C",
                   }}
                 >
-                  <strong style={{ color: "#130D3C" }}> Thumbnail </strong>
+                  <strong className="modalTitle"> Thumbnail </strong>
                 </Label>
               </Col>
             </Grid>
+
             <Box
               sx={{
                 display: "flex",
@@ -191,7 +197,6 @@ export default function AddVideoModal({ show, closeModal }) {
             >
               <Button
                 variant="contained"
-                type="file"
                 component="span"
                 style={{
                   marginTop: "5px",
@@ -244,6 +249,7 @@ export default function AddVideoModal({ show, closeModal }) {
               </Button>
             </Box>
             <FormControlLabel
+              style={{ marginTop: "15px", marginBottom: "15px" }}
               sx={{
                 display: "block",
               }}
@@ -257,38 +263,18 @@ export default function AddVideoModal({ show, closeModal }) {
                 />
               }
             />
-            <Grid item xs={5} style={{ marginLeft: "-20px" }}>
-              <Button
-                variant="contained"
-                style={{
-                  float: "left",
-                  marginLeft: "28px",
-                  //   padding: "10px 24px",
-                  //   textAlign: "left",
-                  color: "#fff",
-                  backgroundColor: "#FF771B",
-                  //   width: "65px",
-                  borderRadius: "5px",
-                }}
-              >
+
+            <Grid item xs={12}>
+              <button variant="contained" className="save">
                 Send
-              </Button>
-              <Button
+              </button>
+              <button
                 variant="contained"
                 onClick={closeModal}
-                style={{
-                  //   float: "left",
-                  marginLeft: "30px",
-                  //   padding: "10px 24px",
-                  //   textAlign: "left",
-                  color: "#130D3C",
-                  backgroundColor: "#FFF",
-                  width: "25%",
-                  borderRadius: "5px",
-                }}
+                className="cancel"
               >
                 Cancel
-              </Button>
+              </button>
             </Grid>
           </Form>
         </Box>
